@@ -1,8 +1,14 @@
 aid: ezr
 name: EZR
-description: 'EZR is a company surfaced as a portfolio company of dcm-ventures and added to the API Evangelist
-  network as a stub for enrichment. Sector: enterprise. This profile is a lead awaiting the enrichment
-  pipeline.'
+description: 'EZR (上海驿氪 / Shanghai Yike Information Technology) is a Shanghai-based retail
+  marketing technology company founded in 2015 that builds SCRM and new-retail CRM software
+  for multi-store and chain brands. Its platform combines a Marketing Cloud and in-store
+  CRM to deliver omnichannel member management, WeChat mini-program malls, guide (导购)
+  distribution and full-staff sales tools, live-streaming commerce, points malls, and
+  campaign automation. EZR serves 800+ brands across fashion, beauty, home goods, food,
+  and pharmacy, and is backed by Tencent, JD.com, DCM, and Lenovo Star. The company
+  advertises an open platform of 100+ APIs covering products, users, transactions, and
+  marketing, though it publishes no public developer portal, OpenAPI, or API reference.'
 url: https://raw.githubusercontent.com/api-evangelist/ezr/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -10,12 +16,32 @@ x-backed-by:
 - dcm-ventures
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source: []
+  generated: '2026-07-22'
+  method: derived
+image: https://www.ezrpro.com/public/icon.png
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
 tags:
 - Company
 - Enterprise
+- SCRM
+- CRM
+- Retail
+- Marketing
+- WeChat
+- E-Commerce
+- Loyalty
+- China
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -25,3 +51,22 @@ maintainers:
 common:
 - type: Website
   url: https://www.ezrpro.com/
+- type: DeveloperPortal
+  name: Open Platform (开放接口)
+  url: https://www.ezrpro.com/ecology/link
+- type: Blog
+  name: News Center (新闻中心)
+  url: https://www.ezrpro.com/about/news
+- type: Support
+  name: Contact (联系方式)
+  url: https://www.ezrpro.com/contact
+- type: PrivacyPolicy
+  name: Privacy Policy (隐私政策)
+  url: http://www.ezrpro.com/privacy.html
+- type: DomainSecurity
+  url: security/ezr-domain-security.yml
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence
