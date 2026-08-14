@@ -1,36 +1,51 @@
 aid: ezr
 name: EZR
-description: 'EZR (上海驿氪 / Shanghai Yike Information Technology) is a Shanghai-based retail
-  marketing technology company founded in 2015 that builds SCRM and new-retail CRM software
-  for multi-store and chain brands. Its platform combines a Marketing Cloud and in-store
-  CRM to deliver omnichannel member management, WeChat mini-program malls, guide (导购)
-  distribution and full-staff sales tools, live-streaming commerce, points malls, and
-  campaign automation. EZR serves 800+ brands across fashion, beauty, home goods, food,
-  and pharmacy, and is backed by Tencent, JD.com, DCM, and Lenovo Star. The company
-  advertises an open platform of 100+ APIs covering products, users, transactions, and
-  marketing, though it publishes no public developer portal, OpenAPI, or API reference.'
+description: 'EZR (上海驿氪 / Shanghai EasyRetailPro) is a Shanghai-based retail marketing
+  technology company founded in 2015 that builds SCRM and new-retail CRM software for
+  multi-store and chain brands. Its platform combines a Marketing Cloud and in-store CRM to
+  deliver omnichannel member management, WeChat mini-program malls, guide (导购) distribution
+  and full-staff sales tools, live-streaming commerce, points malls, and campaign automation.
+  EZR serves 800+ brands across fashion, beauty, home goods, food, and pharmacy, and is backed
+  by Tencent, JD.com, DCM, and Lenovo Star. The EZR Open Platform (开放平台) at
+  open.ezrpro.com publishes a reference for 236 interfaces across 11 business domains —
+  stores and staff, member master data, loyalty points, coupons, sales receipts, WeChat mall,
+  gift cards, messaging and third-party platform binding — of which 31 are EZR-to-integrator
+  push callbacks. Every interface is an HTTP POST with a form-encoded, SHA1/MD5-signed
+  envelope carrying the business payload as a JSON string; there is no OpenAPI, no OAuth, no
+  versioning scheme and no self-service onboarding. EZR does publish a packaged Agent Skill
+  for generating integration code.'
 url: https://raw.githubusercontent.com/api-evangelist/ezr/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - dcm-ventures
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: profiled
+x-tier-reason: >-
+  Upgraded from stub on 2026-08-13. The EZR Open Platform was located at open.ezrpro.com with a
+  complete, anonymously readable reference for 236 interfaces, plus a provider-published Agent
+  Skill. The prior profile's claim that EZR "publishes no public developer portal or API
+  reference" was wrong and has been corrected.
 accessModel:
-  pricing: unknown
-  onboarding: unknown
+  pricing: contact-sales
+  onboarding: sales
   trial: false
   try_now: false
   public: false
-  label: Unknown
-  confidence: low
-  source: []
-  generated: '2026-07-22'
-  method: derived
+  label: Sales-gated
+  confidence: high
+  source:
+  - https://open.ezrpro.com/#/apiFile/guide/00001
+  - https://www.ezrpro.com/contact
+  generated: '2026-08-13'
+  method: searched
+  note: >-
+    Onboarding requires EZR to issue an AppId, Token and AppSystem and to enable interface
+    permissions; the caller's IP must also be allowlisted. No pricing is published for the
+    platform or the API.
 image: https://www.ezrpro.com/public/icon.png
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-19'
+modified: '2026-08-13'
 tags:
 - Company
 - Enterprise
@@ -41,8 +56,86 @@ tags:
 - WeChat
 - E-Commerce
 - Loyalty
+- Membership
+- Coupons
+- Point of Sale
+- Webhooks
 - China
-apis: []
+apis:
+- name: EZR Open Platform
+  description: >-
+    The EZR 开放平台 integration surface — 236 documented interfaces across 11 business
+    domains (base data, member master data, loyalty points, coupons, sales data, WeChat mall,
+    external mall distribution, messaging, gift cards, third-party platform binding, and
+    extension references). Every interface is an HTTPS POST to a verb-named route with an
+    application/x-www-form-urlencoded envelope of AppId, Sign, Timestamp, AppSystem and Args,
+    where Args is the business payload as a JSON string. Responses always return HTTP 200 and
+    signal the real outcome in a numeric StatusCode. 31 of the interfaces are EZR-to-integrator
+    push callbacks. No OpenAPI is published.
+  humanURL: https://open.ezrpro.com/#/apiFile
+  baseURL: https://open-tp.ezrpro.com
+  image: https://www.ezrpro.com/public/icon.png
+  tags:
+  - SCRM
+  - CRM
+  - Loyalty
+  - Membership
+  - Coupons
+  - Retail
+  - WeChat
+  - E-Commerce
+  properties:
+  - type: Documentation
+    name: API Reference (文档中心)
+    url: https://open.ezrpro.com/#/apiFile
+  - type: GettingStarted
+    name: Developer Guide (开发指南)
+    url: https://open.ezrpro.com/#/apiFile/guide/00001
+  - type: Authentication
+    url: authentication/ezr-authentication.yml
+  - type: Conventions
+    url: conventions/ezr-conventions.yml
+  - type: ErrorCatalog
+    name: Status Code Reference (编码规范)
+    url: errors/ezr-status-codes.yml
+  - type: Webhooks
+    name: Push callbacks (推送回调)
+    url: asyncapi/ezr-webhooks.yml
+  - type: DataModel
+    url: data-model/ezr-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ezr-rate-limits.yml
+  - type: Sandbox
+    name: Test environment (测试环境)
+    url: sandbox/ezr-sandbox.yml
+  - type: Lifecycle
+    url: lifecycle/ezr-lifecycle.yml
+  - type: ChangeLog
+    url: changelog/ezr-changelog.yml
+  - type: AgentSkill
+    name: ezr-openapi-creator
+    url: skills/_index.yml
+- name: EZR KOS Open Platform
+  description: >-
+    The KOS (Key Opinion Sales) open platform — EZR's separate integration surface for
+    guide/associate-led social selling, documented in its own developer guide with its own
+    hosts. It uses the same AppId / Sign / Timestamp / AppSystem signed-request scheme as the
+    main Open Platform. EZR publishes the access model and request paths but no per-interface
+    reference on the public portal.
+  humanURL: https://open.ezrpro.com/#/apiFile/kos
+  baseURL: https://open-kos-tp.ezrpro.com
+  image: https://www.ezrpro.com/public/icon.png
+  tags:
+  - SCRM
+  - Retail
+  - Social Selling
+  - WeChat
+  properties:
+  - type: GettingStarted
+    name: KOS Developer Guide (KOS平台开发指南)
+    url: https://open.ezrpro.com/#/apiFile/kos
+  - type: Authentication
+    url: authentication/ezr-authentication.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -52,8 +145,17 @@ common:
 - type: Website
   url: https://www.ezrpro.com/
 - type: DeveloperPortal
-  name: Open Platform (开放接口)
-  url: https://www.ezrpro.com/ecology/link
+  name: EZR开放平台 (EZR Open Platform)
+  url: https://open.ezrpro.com/
+- type: Documentation
+  name: API Reference (文档中心)
+  url: https://open.ezrpro.com/#/apiFile
+- type: APIReference
+  name: Interface Reference (接口文档)
+  url: https://open.ezrpro.com/#/apiFile
+- type: GettingStarted
+  name: Developer Guide (开发指南)
+  url: https://open.ezrpro.com/#/apiFile/guide/00001
 - type: Blog
   name: News Center (新闻中心)
   url: https://www.ezrpro.com/about/news
@@ -63,10 +165,39 @@ common:
 - type: PrivacyPolicy
   name: Privacy Policy (隐私政策)
   url: http://www.ezrpro.com/privacy.html
+- type: Authentication
+  url: authentication/ezr-authentication.yml
+- type: Conventions
+  url: conventions/ezr-conventions.yml
+- type: ErrorCatalog
+  url: errors/ezr-status-codes.yml
+- type: Webhooks
+  url: asyncapi/ezr-webhooks.yml
+- type: DataModel
+  url: data-model/ezr-data-model.yml
+- type: RateLimits
+  url: rate-limits/ezr-rate-limits.yml
+- type: Plans
+  url: plans/ezr-plans-pricing.yml
+- type: Sandbox
+  url: sandbox/ezr-sandbox.yml
+- type: Lifecycle
+  url: lifecycle/ezr-lifecycle.yml
+- type: ChangeLog
+  url: changelog/ezr-changelog.yml
+- type: AgentSkill
+  name: ezr-openapi-creator (published by EZR)
+  url: skills/_index.yml
+- type: Packages
+  url: packages/ezr-packages.yml
+- type: Conformance
+  url: conformance/ezr-conformance.yml
 - type: DomainSecurity
   url: security/ezr-domain-security.yml
+- type: LLMsTxt
+  url: llms/ezr-llms.txt
 x-enrichment:
-  date: '2026-07-19'
-  status: backfilled
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 21
   pass: local-v1
-  note: backfilled from .gitignore signal + verified work evidence
