@@ -43,7 +43,7 @@ accessModel:
     permissions; the caller's IP must also be allowlisted. No pricing is published for the
     platform or the API.
 image: https://www.ezrpro.com/public/icon.png
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 created: '2026-07-17'
 modified: '2026-08-13'
 tags:
