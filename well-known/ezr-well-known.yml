@@ -1,0 +1,91 @@
+generated: '2026-08-13'
+method: probed
+source: live HTTPS probes of every EZR host in apis.yml and in the published environment list
+note: >-
+  ZERO HITS. Every /.well-known/ path was probed on all four EZR hosts and not one returned a
+  document. The two web hosts are single-page-app catch-alls that answer HTTP 200 with an HTML
+  shell (or an empty body) for ANY path — a soft 404, not a served document — so no WellKnown
+  and no SecurityTxt pointer is emitted in apis.yml. The two API hosts return honest 404s.
+  This file records a verified absence, which is valid data; it must not be read as a presence.
+soft_404_warning: >-
+  www.ezrpro.com returns HTTP 200 with a 7,070-byte SPA shell for every unknown path
+  (/openapi.json, /swagger.json, /api-docs, /docs, /llms.txt, /pricing all match byte-for-byte)
+  and 200 with a zero-byte body under /.well-known/. open.ezrpro.com returns its 559-byte
+  index.html for every path. A status-code-only check would false-positive on both.
+documents_found: 0
+hosts:
+- host: www.ezrpro.com
+  role: corporate website
+  soft_404: true
+  documents:
+  - {path: /.well-known/security.txt, status: 200, hit: false, reason: zero-byte body, no RFC 9116 document}
+  - {path: /.well-known/openid-configuration, status: 301, hit: false, reason: redirect, no document}
+  - {path: /.well-known/oauth-authorization-server, status: 200, hit: false, reason: zero-byte body}
+  - {path: /.well-known/api-catalog, status: 200, hit: false, reason: zero-byte body}
+  - {path: /.well-known/ai-plugin.json, status: 200, hit: false, reason: zero-byte body}
+  - {path: /.well-known/agent-card.json, status: 200, hit: false, reason: 46-byte non-JSON body, not an AgentCard}
+  - {path: /.well-known/agent.json, status: 200, hit: false, reason: zero-byte body}
+  - {path: /llms.txt, status: 200, hit: false, reason: SPA HTML shell identical to every other unknown path}
+- host: open.ezrpro.com
+  role: developer portal (EZR开放平台)
+  soft_404: true
+  documents:
+  - {path: /.well-known/security.txt, status: 200, hit: false, reason: SPA index.html}
+  - {path: /.well-known/openid-configuration, status: 200, hit: false, reason: SPA index.html}
+  - {path: /.well-known/oauth-authorization-server, status: 200, hit: false, reason: SPA index.html}
+  - {path: /.well-known/api-catalog, status: 200, hit: false, reason: SPA index.html}
+  - {path: /.well-known/ai-plugin.json, status: 200, hit: false, reason: SPA index.html}
+  - {path: /.well-known/agent-card.json, status: 200, hit: false, reason: SPA index.html, not a JSON AgentCard}
+  - {path: /.well-known/agent.json, status: 200, hit: false, reason: SPA index.html}
+  - {path: /llms.txt, status: 200, hit: false, reason: SPA index.html}
+- host: open-tp.ezrpro.com
+  role: production API (QCloud)
+  soft_404: false
+  documents:
+  - {path: /.well-known/security.txt, status: 404, hit: false}
+  - {path: /.well-known/openid-configuration, status: 404, hit: false}
+  - {path: /.well-known/oauth-authorization-server, status: 404, hit: false}
+  - {path: /.well-known/api-catalog, status: 404, hit: false}
+  - {path: /.well-known/ai-plugin.json, status: 404, hit: false}
+  - {path: /.well-known/agent-card.json, status: 404, hit: false}
+  - {path: /.well-known/agent.json, status: 404, hit: false}
+  - {path: /llms.txt, status: 404, hit: false}
+- host: open-q1.ezrpro.com
+  role: test API
+  soft_404: false
+  documents:
+  - {path: /.well-known/security.txt, status: 404, hit: false}
+  - {path: /.well-known/openid-configuration, status: 404, hit: false}
+  - {path: /.well-known/oauth-authorization-server, status: 404, hit: false}
+  - {path: /.well-known/api-catalog, status: 404, hit: false}
+  - {path: /.well-known/ai-plugin.json, status: 404, hit: false}
+  - {path: /.well-known/agent-card.json, status: 404, hit: false}
+  - {path: /.well-known/agent.json, status: 404, hit: false}
+  - {path: /llms.txt, status: 404, hit: false}
+- host: doc.ezrpro.com
+  role: former help centre / developer documentation
+  documents:
+  - {path: /, status: 0, hit: false, reason: 'DNS no longer resolves (NXDOMAIN) — host retired'}
+spec_discovery:
+  note: >-
+    STEP 0b contract discovery was run against every host above. No OpenAPI, Swagger, GraphQL,
+    gRPC or AsyncAPI document exists at any conventional location.
+  probed:
+  - {url: 'https://www.ezrpro.com/openapi.json', status: 200, result: SPA HTML shell}
+  - {url: 'https://www.ezrpro.com/swagger.json', status: 200, result: SPA HTML shell}
+  - {url: 'https://www.ezrpro.com/api-docs', status: 200, result: SPA HTML shell}
+  - {url: 'https://www.ezrpro.com/docs', status: 200, result: SPA HTML shell}
+  - {url: 'https://openapi.ezrpro.com/', status: 0, result: DNS does not resolve}
+  - {url: 'https://api.ezrpro.com/', status: 0, result: DNS does not resolve}
+  - {url: 'https://gw.ezrpro.com/', status: 0, result: DNS does not resolve}
+  - {url: 'https://apidoc.ezrpro.com/', status: 404, result: 'JSON 404 — CDN host serving only the two sample zips'}
+  - {url: 'https://open-tp.ezrpro.com/', status: 200, result: '2-byte text/plain health response; no spec at any probed path'}
+  found_instead:
+    kind: documentation API
+    endpoints: ['https://open.ezrpro.com/api/Book', 'https://open.ezrpro.com/api/Book/1', 'https://open.ezrpro.com/api/Doc/{id}', 'https://open.ezrpro.com/api/Doc/List?keyword=']
+    auth: none
+    description: >-
+      An anonymous JSON documentation API backing the developer portal, returning all 11
+      categories and all 236 interfaces with route, code, title, LastModifiedOn, and per
+      interface a typed ReqParam/ResParam tree plus request/response examples. It is a docs
+      API, not an API description format — no OpenAPI has been authored from it.

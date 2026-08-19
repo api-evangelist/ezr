@@ -1,0 +1,125 @@
+generated: '2026-08-13'
+method: searched
+source: https://open.ezrpro.com/#/apiFile/guide/00001
+docs:
+- https://open.ezrpro.com/#/apiFile/guide/00001
+- https://open.ezrpro.com/#/apiFile/guide/00002
+- https://open.ezrpro.com/#/apiFile/guide/00003
+note: >-
+  Cross-cutting request/response semantics of the EZR Open Platform, read from the provider's
+  own developer guide, status-code page and signing page, and corroborated against the 236
+  interface definitions served anonymously from https://open.ezrpro.com/api/Book and
+  /api/Doc/{id}. EZR publishes no OpenAPI; nothing here is inferred from a spec that does not
+  exist.
+transport:
+  protocol: HTTPS (plaintext HTTP also published for the UCloud and QCloud environments)
+  method: POST for every interface, including read operations
+  content_type: application/x-www-form-urlencoded
+  encoding: UTF-8
+  body_style: >-
+    Form fields at the envelope level (AppId, Sign, Timestamp, AppSystem, Args); the business
+    payload is a JSON string in the single Args field, read server-side as Request["Args"].
+  rest_style: >-
+    EZR describes the API as "标准的RESTful API方式设计", but in practice it is an RPC-over-form
+    design — verb-named routes under /api/<domain>/<action>, all POST, no resource URIs, no
+    HTTP status semantics. Record this honestly rather than as REST.
+authentication:
+  style: signed request (AppId + Token-derived Sign)
+  artifact: authentication/ezr-authentication.yml
+  header_or_body: form body
+request_envelope:
+  fields:
+  - {name: AppId, type: string, required: true}
+  - {name: Sign, type: string, required: true}
+  - {name: Timestamp, type: string, required: true, format: yyyyMMddHHmmss}
+  - {name: AppSystem, type: string, required: true}
+  - {name: Args, type: string, required: true, description: business parameters as a JSON string}
+response_envelope:
+  fields:
+  - {name: Status, type: bool}
+  - {name: StatusCode, type: int}
+  - {name: Msg, type: string}
+  - {name: Sign, type: string}
+  - {name: Timestamp, type: string}
+  - {name: Result, type: object|array}
+  transport_status: always HTTP 200 — failures are signalled in StatusCode, not the HTTP status line
+  artifact: errors/ezr-status-codes.yml
+idempotency:
+  supported: false
+  provider_key_header: null
+  note: >-
+    EZR ships NO idempotency key. The only idempotency language in the entire published
+    reference points the other way: on outbound pushes EZR states "第三方系统需做并发幂等处理" —
+    the THIRD PARTY must make its receiver idempotent, because EZR retries a failed push six
+    times. That is a requirement placed on the consumer, not an idempotency contract offered
+    by the provider, so no Idempotency pointer is emitted for this repo.
+  consumer_obligation:
+    applies_to: inbound pushes from EZR (asyncapi/ezr-webhooks.yml)
+    retry_policy: 3s timeout, 6 retries — 3 at 30s intervals then 3 at 20-minute intervals
+    source: https://open.ezrpro.com/#/apiFile/guide/00001
+  natural_keys:
+    note: >-
+      Several write interfaces enforce uniqueness on a business key instead — e.g. the member
+      data-cleansing import (api/cvip/vipinit) rejects duplicate card numbers, and StatusCode
+      2102 (业务编码已存在) / 1200 (请求数据存在键值重复) signal duplicate business codes.
+      This is de-duplication, not request replay safety.
+replay_protection:
+  mechanism: timestamp window
+  window_minutes: 10
+  rejection_code: 308
+  note: Signed Timestamp must be within 10 minutes of server time; older requests are rejected.
+pagination:
+  supported: partial
+  style: page-number
+  request_params: [PageIndex, PageSize]
+  note: >-
+    Only the explicitly paged interfaces take PageIndex/PageSize (26 of 236 interfaces declare
+    PageIndex). There is no cursor pagination and no uniform envelope-level paging block;
+    total-row counts appear inside Result on the interfaces that support them.
+batching:
+  supported: true
+  rule: >-
+    "请求数据实体，描述为单个对象的则只支持单条数据的请求；反之为对象数组则支持批量请求" — an
+    interface whose Args is documented as an object accepts one record; one documented as an
+    array accepts a batch.
+  limits: per-interface (e.g. the member cleansing import caps at 500 rows)
+  error_code: 1001 (请求业务数据超过长度) when the payload exceeds the limit
+field_expansion:
+  supported: false
+  note: No sparse-fieldset or expand parameter; some interfaces publish "simple field" variants instead (e.g. 2026 查询商城订单简单版字段批量).
+metadata:
+  supported: false
+  note: No generic metadata bag. Member extension attributes are a first-class interface instead (1226 修改会员扩展属性, 1228 会员扩展信息查询).
+request_tracing:
+  request_id_header: null
+  note: No request-id or correlation-id is documented on either the request or the response envelope.
+versioning:
+  scheme: none-in-transport
+  note: >-
+    There is no version segment in the route, no version header, and no version field in the
+    envelope. Interfaces are versioned by NUMBER — a changed contract ships as a new interface
+    code (e.g. 1231 会员服务关系变更推送 alongside 12311 会员服务关系变更单条推送; 1213
+    优惠券发放推送 alongside 12131 券批量发放推送). The reference exposes a per-interface
+    LastModifiedOn date, which is the only change signal available.
+  artifact: lifecycle/ezr-lifecycle.yml
+rate_limit_signaling:
+  headers: none
+  status_code: 407 (访问频率过快)
+  documented_limit: 10 concurrent requests per second per interface per AppSystem (production default)
+  artifact: rate-limits/ezr-rate-limits.yml
+error_envelope:
+  format: proprietary (Status / StatusCode / Msg)
+  rfc9457: false
+  artifact: errors/ezr-status-codes.yml
+discovery:
+  machine_readable_reference: true
+  endpoints:
+  - {url: 'https://open.ezrpro.com/api/Book', description: full interface catalogue — 11 categories, 236 interfaces with code, title, route and LastModifiedOn}
+  - {url: 'https://open.ezrpro.com/api/Book/1', description: the API文档中心 book}
+  - {url: 'https://open.ezrpro.com/api/Doc/{id}', description: per-interface definition — Description, Envs, PublicReqParam, PublicResParam, ReqParam, ResParam, ReqExample, ResExample, ErrorParam}
+  - {url: 'https://open.ezrpro.com/api/Doc/List?keyword={q}', description: keyword search across the reference}
+  auth: none (anonymous)
+  note: >-
+    This is the closest thing EZR has to a machine-readable contract. It is a documentation
+    API, not an API description format — it is not OpenAPI, and no OpenAPI has been authored
+    from it.

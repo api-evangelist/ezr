@@ -1,0 +1,70 @@
+generated: '2026-08-13'
+method: searched
+source: https://open.ezrpro.com/#/apiFile/guide/00001
+docs: https://open.ezrpro.com/#/apiFile/guide/00001
+note: >-
+  EZR publishes exactly one numeric limit, in the "关于接口并发数" section of its developer
+  guide, plus a dedicated status code for exhaustion. It publishes no rate-limit response
+  headers, so a client cannot see remaining budget or a reset time — the only runtime signal
+  is StatusCode 407.
+limit_count: 1
+limits:
+- id: interface-concurrency
+  scope: per-interface, per-AppSystem
+  environment: production (正式环境)
+  limit: 10
+  unit: concurrent requests per second
+  window: 1s
+  burst: null
+  default: true
+  negotiable: true
+  negotiation: >-
+    "具体上限请咨询客户经理" — the actual ceiling is set per customer; ask the EZR account
+    manager. 10/s is the documented default, not a hard cap.
+  quoted: 正式环境，按appSystem，每接口每秒并发数上限默认为10，具体上限请咨询客户经理
+  source: https://open.ezrpro.com/#/apiFile/guide/00001
+response_headers:
+  published: false
+  x_ratelimit: []
+  ratelimit_draft: []
+  retry_after: false
+  note: >-
+    No X-RateLimit-*, no RFC 9238/draft RateLimit-* fields, and no Retry-After. EZR returns
+    HTTP 200 for every outcome, so even the transport layer carries no signal — the client
+    must parse the JSON envelope.
+exhaustion:
+  http_status: 200
+  status_code: 407
+  message: 访问频率过快 (request rate too high)
+  class: client-error
+  guidance: >-
+    Per the published status-code conventions, non-200 codes are client-caused and may be
+    retried after correction — so a 407 should be backed off and retried by the caller.
+  source: https://open.ezrpro.com/#/apiFile/guide/00002
+related_limits:
+- id: payload-size
+  scope: per-request
+  description: Business payload length is capped per interface; exceeding it returns StatusCode 1001 (请求业务数据超过长度).
+  limit: null
+- id: batch-rows
+  scope: per-interface
+  description: >-
+    Batch interfaces cap row counts individually — e.g. the member data-cleansing import
+    (api/cvip/vipinit) documents a maximum of 500 rows.
+  limit: 500
+  applies_to: '47'
+- id: timestamp-window
+  scope: per-request
+  description: Signed Timestamp must be within 10 minutes of server time or the request is rejected with StatusCode 308.
+  limit: 600
+  unit: seconds
+- id: push-timeout
+  scope: outbound push to the integrator
+  description: >-
+    EZR's own limit on the receiver — a push must be answered within 3 seconds or EZR treats
+    it as a timeout and retries 6 times (3 x 30s, then 3 x 20min).
+  limit: 3
+  unit: seconds
+  artifact: asyncapi/ezr-webhooks.yml
+network_controls:
+- IP allowlist — a call from an unregistered address is rejected with StatusCode 400, independent of rate.

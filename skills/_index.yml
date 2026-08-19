@@ -1,0 +1,65 @@
+generated: '2026-08-13'
+method: searched
+source: https://skills-cdn-tp.ezrpro.com/skills/ezr-skills-openapi.zip
+note: >-
+  EZR publishes its own packaged Agent Skill from the "开发工具 / EZR接口对接Skill" page of the
+  EZR Open Platform (https://open.ezrpro.com/#/apiFile/guide/20003). The distributed zip
+  (ezr-skills-openapi.zip, 285,545 bytes, HTTP 200, application/x-zip-compressed) contains a
+  Claude-style skill.md with frontmatter, a manifest.json, and 75 reference files covering
+  51 REST interfaces and 17 push callbacks. Everything here is saved VERBATIM from that zip —
+  nothing was authored by API Evangelist. The reference/api and reference/callback markdown
+  files (Chinese-language, one per interface) are not copied into this repo; they are
+  redistributable from the zip and are indexed by ezr-api-index.md.
+publisher: EZR (上海驿氪 / Shanghai EasyRetailPro)
+skills:
+- file: ezr-openapi-creator.md
+  name: ezr-openapi-creator
+  title: EZR OpenAPI接口对接技能 (EZR OpenAPI integration skill)
+  description: >-
+    One-shot generator for EZR Open Platform integration code. Operates in single-interface
+    mode (user supplies an interface code such as 1000, 1203, 1302) or scene mode (user picks
+    business scenarios and the skill batch-generates every interface in them). Targets .NET 5
+    projects; scaffolds the SHA1/MD5 signing utilities, the IEZROpenApiClient/EZROpenApiClient
+    HTTP client, and the OpenApiOptions configuration, then emits request models and service
+    classes tagged with `// [EZR-API:<code>]` markers and runs `dotnet build`.
+  api: https://open.ezrpro.com/#/apiFile
+  version: 1.0.0
+  author: zhengkk
+  method: searched
+  scenes:
+  - name: 会员开卡场景 (member card issuance)
+    apis: ['1190', '1201', '1202', '1203']
+    callbacks: ['1210', '12105']
+  - name: 会员扩展场景 (member extension)
+    apis: ['1225', '1226', '1227', '1228', '1229', '1230']
+    callbacks: []
+  - name: 等级场景 (member grade)
+    apis: ['1207']
+    callbacks: ['1214']
+  - name: 积分场景 (loyalty points)
+    apis: ['1188', '1204', '1206', '1224', '1232', '1233', '1234', '1244']
+    callbacks: ['1211']
+  - name: 订单场景 (orders)
+    apis: ['1247', '1220']
+    callbacks: []
+  - name: 优惠券场景 (coupons)
+    apis: ['1300', '1302', '1307', '1308', '1309', '1311', '1313', '1323']
+    callbacks: ['12131', '1213', '1217', '1219', '1310', '1312']
+supporting_files:
+- file: ezr-openapi-creator-manifest.json
+  role: skill manifest (name, version, main, title, description, author) — verbatim
+- file: ezr-common-infrastructure.md
+  role: >-
+    verbatim references/common-infrastructure.md — signing utilities, HTTP client, config,
+    environments, and the standard request/response envelope shared by every interface
+- file: ezr-api-index.md
+  role: verbatim references/api-index.md — the interface index the skill routes on
+- file: ezr-scene-index.md
+  role: verbatim references/scene-index.md — the business-scenario to interface-code map
+x-evidence:
+  fetched: '2026-08-13'
+  url: https://skills-cdn-tp.ezrpro.com/skills/ezr-skills-openapi.zip
+  http_status: 200
+  content_type: application/x-zip-compressed
+  bytes: 285545
+  files_in_zip: 79

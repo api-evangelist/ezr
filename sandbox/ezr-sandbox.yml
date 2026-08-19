@@ -1,0 +1,83 @@
+generated: '2026-08-13'
+method: searched
+source: https://open.ezrpro.com/#/apiFile/guide/00001
+docs: https://open.ezrpro.com/#/apiFile/guide/00001
+note: >-
+  EZR publishes a named, addressable test environment and prints its hostname in both the
+  developer guide and the Envs block of all 236 interface definitions served from
+  https://open.ezrpro.com/api/Doc/{id}. What it does NOT publish is any way to obtain
+  credentials for it: there are no test keys, no self-service sign-up, no magic test values,
+  no fixture or trigger tooling, and no time simulation. The sandbox is real but gated behind
+  the same account-manager provisioning as production.
+separation:
+  model: separate-host
+  test_live_switch: base URL only — the same AppId/Token/AppSystem scheme applies in both
+  key_prefixes: none published
+  mode_flag: none — there is no live/test flag in the request envelope
+environments:
+- name: 测试环境 (test)
+  role: sandbox
+  https: https://open-q1.ezrpro.com
+  http: null
+  service: EZR Open Platform
+- name: UCloud
+  role: production
+  https: https://open-up.ezrpro.com
+  http: http://open-up.ezrpro.com
+  service: EZR Open Platform
+- name: QCloud
+  role: production
+  https: https://open-tp.ezrpro.com
+  http: http://open-tp.ezrpro.com
+  service: EZR Open Platform
+- name: KOS 测试环境 (test)
+  role: sandbox
+  https: https://open-kos-q1.ezrpro.com
+  http: null
+  service: EZR KOS Open Platform
+- name: KOS QCloud
+  role: production
+  https: https://open-kos-tp.ezrpro.com
+  http: null
+  service: EZR KOS Open Platform
+credentials:
+  self_service: false
+  how_to_obtain: >-
+    Contact EZR technical support / the account manager. The developer guide's onboarding
+    steps are: request a merchant AppId and the interface request address, EZR then issues
+    Token and AppSystem and enables interface permissions.
+  test_credentials_published: false
+  note: >-
+    The provider's own Agent Skill (skills/ezr-common-infrastructure.md) says the same thing —
+    "联系 EZR 技术支持获取以下信息" for AppId, Token, AppSystem and EncryptType. The one value
+    that appears in the reference, AppId "ezr-test", is a documentation placeholder in the
+    published example block, not a working credential, and is not usable without a Token.
+test_data:
+  test_cards: []
+  test_accounts: []
+  magic_values: []
+  note: >-
+    None published. This is a retail CRM, not a card acquirer — there are no test card numbers
+    to publish — and no magic member/store/coupon identifiers are documented for the test host.
+tooling:
+  test_clocks: false
+  fixtures: false
+  event_triggers: false
+  request_console: false
+  note: >-
+    The documentation site has no "try it" console. The published testing aid is a Postman
+    screenshot in the developer guide showing how to form-encode the Args field, plus two
+    downloadable sample projects (see packages/ezr-packages.yml).
+sample_projects:
+- language: csharp
+  name: OpenApiDemo
+  version: 1.0.1
+  url: http://apidoc.ezrpro.com/OpenApiDemo-v1.0.1.zip
+- language: java
+  name: JavaOpenApiDemo
+  version: 1.0.2
+  url: http://apidoc.ezrpro.com/JavaOpenApiDemo-v1.0.2.zip
+gaps:
+- No self-service test credentials — the sandbox cannot be reached without a sales conversation.
+- No published test data or simulation values.
+- No way to trigger a push/callback for testing the webhook receiver.

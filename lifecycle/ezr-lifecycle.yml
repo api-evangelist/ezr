@@ -1,0 +1,85 @@
+generated: '2026-08-13'
+method: searched
+source: https://open.ezrpro.com/#/apiFile
+note: >-
+  Assembled from what EZR actually publishes on its Open Platform. Most of this artifact is a
+  record of ABSENCE, which is valid data: EZR has no versioning scheme, no deprecation policy,
+  no Sunset/Deprecation header support, no SLA and no status page. What it does have is a
+  per-interface LastModifiedOn date and a handful of interfaces the reference marks 已废弃
+  (abandoned/deprecated) in prose.
+versioning:
+  scheme: none
+  current: null
+  in_url: false
+  in_header: false
+  in_envelope: false
+  docs: https://open.ezrpro.com/#/apiFile/guide/00001
+  practice: >-
+    Contract changes ship as a NEW interface number rather than a version of an existing one.
+    Observed pairs: 1231 会员服务关系变更推送 -> 12311 会员服务关系变更单条推送;
+    1213 优惠券发放推送 -> 12131 券批量发放推送; 1201 会员线下开卡 -> 12011 会员注销;
+    2001 商城订单推送 -> 20011 订单收货人变更推送 / 20012 订单备注推送.
+    A consumer can only tell an interface changed by re-reading its reference page.
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  advance_notice: null
+  mechanism: prose only — the reference labels a superseded interface 已废弃 (abandoned) in its listing
+  deprecated_interfaces:
+  - code: '4001'
+    name: 微信模板消息发送(微信模板) — WeChat template message send (WeChat template)
+    marker: 已废弃
+    replacement: '4000 微信模板消息发送(EZR模板)'
+    source: https://open.ezrpro.com/#/apiFile/guide/40002
+  - code: '1209'
+    name: 积分商城积分申请异步回掉接口 — points-mall points application async callback
+    marker: 已废弃
+    replacement: null
+    source: https://open.ezrpro.com/#/apiFile/guide/40003
+  note: >-
+    Neither carries a sunset date, a migration guide, or a removal commitment. There is no
+    machine-readable deprecation flag in the documentation API — the Status field on every one
+    of the 236 catalogue entries reads 1.
+change_signal:
+  field: LastModifiedOn
+  endpoint: https://open.ezrpro.com/api/Book
+  auth: none
+  coverage: 236 of 236 interfaces
+  newest: '2026-08-12'
+  oldest: '2021-08-30'
+  artifact: changelog/ezr-changelog.yml
+  note: >-
+    This is the only dated, machine-readable lifecycle signal EZR emits, and it is genuinely
+    useful: 21 interface references were revised in 2026 and the newest is one day old, so the
+    platform is actively maintained rather than abandoned.
+sla:
+  url: null
+  uptime_target: null
+  published: false
+  inbound_note: >-
+    EZR publishes a latency requirement for the OTHER side of the contract — a push receiver
+    must respond within 3 seconds — but commits to no availability or latency target of its own.
+status_page:
+  url: null
+  published: false
+  probed:
+  - {url: 'https://status.ezrpro.com/', status: 0, result: DNS does not resolve}
+  - {url: 'https://www.ezrpro.com/', status: 200, result: no status/uptime link in the site chrome}
+support:
+  channel: https://www.ezrpro.com/contact
+  model: account manager / technical support, no public developer support forum or ticket queue
+retirement_observed:
+  host: doc.ezrpro.com
+  status: DNS no longer resolves (NXDOMAIN, probed 2026-08-13)
+  note: >-
+    The older help-centre docs host referenced by search engines (doc.ezrpro.com/article/...)
+    has been taken down and replaced by the open.ezrpro.com SPA. Inbound links to the previous
+    developer documentation are dead, with no redirect — a real, observed lifecycle failure.
+gaps:
+- No versioning scheme means no way to pin a contract.
+- No deprecation policy, sunset dates or removal notice.
+- No status page and no SLA.
+- Retired the previous documentation host without redirects.

@@ -1,0 +1,82 @@
+generated: '2026-08-13'
+method: searched
+source: https://open.ezrpro.com/#/apiFile/guide/00002
+docs: https://open.ezrpro.com/#/apiFile/guide/00002
+format: proprietary
+note: >-
+  EZR does not use RFC 9457 problem+json. Every EZR Open Platform response — success or
+  failure — returns the same signed JSON envelope with a numeric StatusCode; 200 means
+  success and Status is also true. The published "Status Code规范" page groups codes into
+  three classes: 200 = success; non-200 = caused by the client, safe to fix and retry;
+  500 = server-side, do NOT retry immediately, back off first. Captured verbatim from the
+  provider's own coding-conventions page (titles translated, codes and Chinese text kept).
+envelope:
+  transport_status: HTTP 200 is returned even for business failures
+  fields:
+  - {field: Status, type: bool, meaning: true = business call succeeded}
+  - {field: StatusCode, type: int, meaning: the code below; 200 = success}
+  - {field: Msg, type: string, meaning: human-readable message}
+  - {field: Sign, type: string, meaning: response signature, verifiable by the client}
+  - {field: Timestamp, type: string, meaning: yyyyMMddHHmmss}
+  - {field: Result, type: object|array, meaning: business payload}
+  retry_guidance: >-
+    Codes other than 200 and 500 are client-caused — correct the request and retry. 500 is
+    server-caused — wait before resending the identical request. Response signatures should
+    not be verified when Status=false.
+classes:
+- {range: '200', class: success}
+- {range: 'non-200 (3xx/4xx/1xxx/2xxx)', class: client-error, retry: after correcting the request}
+- {range: '500', class: server-error, retry: after a back-off delay}
+status_code_count: 24
+status_codes:
+- {code: 200, title: 调用成功, title_en: Call succeeded, class: success}
+- {code: 303, title: 无效的json内容, title_en: Invalid JSON content, class: client-error}
+- {code: 306, title: 传入参数格式校验失败, title_en: Parameter format validation failed, class: client-error}
+- {code: 307, title: 请求的参数数据为空, title_en: Request parameter data is empty, class: client-error}
+- code: 308
+  title: 请求时间戳Timestamp已过期，服务端校验时间不可超过10分钟的范围
+  title_en: Request Timestamp expired — the server rejects timestamps more than 10 minutes out
+  class: client-error
+  remediation: Resynchronise the client clock; Timestamp must be within a 10-minute window.
+- code: 400
+  title: 访问受限通常指不在IP白名单
+  title_en: Access restricted — usually the caller is not on the IP allowlist
+  class: client-error
+  remediation: Register the calling IP with EZR; interfaces are enabled by default on grant but require IP allowlisting.
+- code: 405
+  title: 错误的签名请求
+  title_en: Bad request signature
+  class: client-error
+  remediation: 'Recompute Sign as uppercase SHA1/MD5 over AppId={AppId}&Timestamp={Timestamp}&Token={Token}.'
+- {code: 406, title: 请求数据验证失败, title_en: Request data validation failed, class: client-error}
+- {code: 407, title: 访问频率过快, title_en: Request rate too high, class: client-error, remediation: Back off — the documented default is 10 concurrent requests per second per interface per AppSystem.}
+- {code: 500, title: 服务器内部处理业务失败, title_en: Server-side business processing failure, class: server-error, remediation: Do not retry immediately; wait and resend the identical request.}
+- {code: 1000, title: 请求AppId不正确, title_en: Incorrect AppId, class: client-error}
+- {code: 1001, title: 请求业务数据超过长度, title_en: Business payload exceeds the length limit, class: client-error}
+- {code: 1002, title: 请求返回数据不存在, title_en: Requested data does not exist, class: client-error}
+- {code: 1010, title: 渠道编号不存在, title_en: Channel code does not exist, class: client-error}
+- {code: 1200, title: 请求数据存在键值重复, title_en: Duplicate keys in the request data, class: client-error}
+- {code: 2000, title: 业务处理失败, title_en: Business processing failed, class: client-error}
+- {code: 2001, title: 业务数据验证失败, title_en: Business data validation failed, class: client-error}
+- {code: 2010, title: 重试次数过多, title_en: Too many retries, class: client-error}
+- {code: 2100, title: 错误的密码, title_en: Incorrect password, class: client-error}
+- {code: 2101, title: 错误的验证码, title_en: Incorrect verification code, class: client-error}
+- {code: 2102, title: 业务编码已存在, title_en: Business code already exists, class: client-error}
+- {code: 2103, title: 业务编码数据不存在, title_en: Business code data does not exist, class: client-error}
+- {code: 2200, title: 短信消息发送失败, title_en: SMS delivery failed, class: client-error}
+- {code: 2201, title: 微信消息发送失败, title_en: WeChat message delivery failed, class: client-error}
+push_errors:
+  note: >-
+    Errors EZR itself records when POSTing a push/callback to a subscriber, harvested from the
+    ErrorParam block of the callback interface reference (7 of 236 interfaces carry one).
+  source: https://open.ezrpro.com/api/Doc/
+  entries:
+  - code: '500'
+    description: The request was canceled due to the configured HttpClient.Timeout of 3 seconds elapsing.
+    remediation: 推送接口超时，联系数据接收方检查接口响应性能，3秒内无返回视为超时。 (Push timed out — the receiver must respond within 3s.)
+  - code: '500'
+    description: 'An error occurred while sending the request.'
+    remediation: 请求接口出错，检查数据接收方应用响应情况。 (Send failed — check the receiving application.)
+  - code: 其他（非200）
+    description: 业务错误 (business error)
+    remediation: 检查业务数据 (check the business data)

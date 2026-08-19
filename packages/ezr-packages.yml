@@ -1,0 +1,74 @@
+generated: '2026-08-13'
+method: searched
+source: https://open.ezrpro.com/#/apiFile/guide/00001
+note: >-
+  EZR publishes NO client library on any public package registry. Searched npm, PyPI,
+  RubyGems, crates.io, Packagist, NuGet, Maven Central and pkg.go.dev for ezr / ezrpro /
+  driver names — nothing first-party. What it does distribute is two versioned sample projects
+  as raw zips from its own CDN (apidoc.ezrpro.com), linked from the developer guide, plus a
+  packaged Agent Skill. Those are recorded below with the version read from the pinned URL,
+  because there is no registry metadata endpoint to query. No SDKs pointer is emitted in
+  apis.yml: a downloadable demo project is not a maintained client library, and claiming one
+  would credit EZR with an SDK it does not ship.
+registry_search:
+  checked: [npm, pypi, rubygems, crates.io, packagist, nuget, maven-central, pkg.go.dev]
+  first_party_hits: 0
+  checked_on: '2026-08-13'
+package_count: 3
+sdk_count: 0
+packages:
+- language: csharp
+  registry: cdn
+  name: OpenApiDemo
+  kind: sample-project
+  official: true
+  url: http://apidoc.ezrpro.com/OpenApiDemo-v1.0.1.zip
+  install: download and unzip; open in Visual Studio
+  version: 1.0.1
+  published: null
+  version_source: pinned in the distribution URL (OpenApiDemo-v1.0.1.zip)
+  http_status: 200
+  content_type: application/x-zip-compressed
+  bytes: 15952
+  note: >-
+    .NET sample calling the EZR Open Platform. No registry metadata endpoint exists, so the
+    publish date cannot be established — checked, nothing to record. Served over plaintext
+    HTTP only; https on this host is answered by the same CDN but the guide links http.
+- language: java
+  registry: cdn
+  name: JavaOpenApiDemo
+  kind: sample-project
+  official: true
+  url: http://apidoc.ezrpro.com/JavaOpenApiDemo-v1.0.2.zip
+  install: download and unzip; import as a Java project
+  version: 1.0.2
+  published: null
+  version_source: pinned in the distribution URL (JavaOpenApiDemo-v1.0.2.zip)
+  http_status: 200
+  content_type: application/x-zip-compressed
+  bytes: 1573774
+  note: >-
+    Java sample calling the EZR Open Platform. Not published to Maven Central — searched, no
+    first-party coordinates found. Publish date unavailable; checked, nothing to record.
+- language: markdown
+  registry: cdn
+  name: ezr-skills-openapi (ezr-openapi-creator)
+  kind: agent-skill
+  official: true
+  url: https://skills-cdn-tp.ezrpro.com/skills/ezr-skills-openapi.zip
+  install: unzip into the AI IDE's skill directory
+  version: 1.0.0
+  published: null
+  version_source: manifest.json inside the zip (version 1.0.0)
+  http_status: 200
+  content_type: application/x-zip-compressed
+  bytes: 285545
+  note: >-
+    The distribution URL itself is UNPINNED — it floats to whatever is current at
+    /skills/ezr-skills-openapi.zip — so a consumer cannot tell from the link which build they
+    are getting; the version is only visible after unzipping. Captured verbatim in skills/.
+first_party_source_code:
+  github_org: none found
+  note: >-
+    No GitHub, Gitee or Coding organisation for EZR / ezrpro / 上海驿氪 was found. All
+    first-party code is distributed as zips from the company's own CDN.

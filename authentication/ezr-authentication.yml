@@ -1,0 +1,78 @@
+generated: '2026-08-13'
+method: searched
+source: https://open.ezrpro.com/#/apiFile/guide/00001
+docs: https://open.ezrpro.com/#/apiFile/guide/00003
+note: >-
+  Derived from the EZR Open Platform developer guide (开发指南) and signing-algorithm page
+  (加签、验签算法), both published anonymously at open.ezrpro.com, and corroborated by the
+  provider's own packaged Agent Skill (skills/ezr-common-infrastructure.md). EZR publishes no
+  OpenAPI, so there are no OpenAPI securitySchemes to derive from — this profile is read from
+  the provider's prose reference, not fabricated.
+summary:
+  types: [signedRequest]
+  oauth2: false
+  openid_connect: false
+  api_key_in: [form-body]
+  bearer: false
+  mutual_tls: false
+  scopes: none — access is granted per interface at provisioning time, not by scope
+onboarding:
+  steps:
+  - 申请商家代码AppID和接口请求地址 — request a brand/merchant AppId and the interface request address from EZR
+  - 开放平台会分配接入参数Token和Appsystem，并开通接口权限 — EZR issues the Token and AppSystem and enables interface permissions
+  - 按照接口文档实现业务逻辑 — implement against the interface reference
+  self_service: false
+  gate: EZR technical support / account manager assigns credentials; there is no public sign-up
+  source: https://open.ezrpro.com/#/apiFile/guide/00001
+schemes:
+- name: EZRSignedRequest
+  type: signedRequest
+  in: form-body
+  transport: HTTPS POST, application/x-www-form-urlencoded, UTF-8
+  credentials:
+  - {name: AppId, type: string, required: true, description: 品牌接入的应用编号/品牌编码 — the brand/merchant application code issued by EZR}
+  - {name: Token, type: string, required: true, description: shared secret held by the client; never transmitted, only mixed into the signature}
+  - {name: AppSystem, type: string, required: true, description: 对接系统来源 — the calling system identifier (e.g. POS, ERP), also the rate-limit key}
+  - {name: Timestamp, type: string, required: true, description: 'yyyyMMddHHmmss; rejected with StatusCode 308 if more than 10 minutes out'}
+  - {name: Sign, type: string, required: true, description: uppercase hex request signature}
+  - {name: Args, type: string, required: true, description: business parameters as a JSON string}
+  signing:
+    algorithm_default: SHA1
+    algorithm_alternate: MD5 (32) — must be enabled by the EZR project manager
+    canonical_string: AppId={AppId}&Timestamp={Timestamp}&Token={Token}
+    canonicalisation: parameter names sorted in English dictionary order, joined as a query string, UTF-8 bytes
+    encoding: hexadecimal, uppercase
+    published_example:
+      input: AppId=EZP&Timestamp=20150701093010&Token=9cd8c0ed38a9e113
+      note: >-
+        The provider's guide prints worked SHA1 and MD5 outputs for this input; they are
+        illustrative doc values, not credentials, and are intentionally not reproduced here.
+  response_verification:
+    signed: true
+    algorithm: SHA1 over the same AppId/Timestamp/Token canonical string
+    field: Sign
+    rule: >-
+      Verify the response Sign before acting on Result; ignore the message entirely if
+      verification fails. Do not verify when Status=false.
+  webhook_verification:
+    applies_to: asyncapi/ezr-webhooks.yml
+    note: EZR signs its outbound pushes with the same scheme, so receivers can verify inbound pushes.
+network_controls:
+- control: ip-allowlist
+  required: true
+  description: >-
+    Access is IP-restricted; a call from an unregistered address is rejected with StatusCode
+    400 (访问受限通常指不在IP白名单). Interfaces are enabled by default once granted, but
+    re-enabling requires configuring the IP address.
+  source: https://doc.ezrpro.com/ (help centre, per search result) and status code 400
+environments:
+- {name: 测试环境 (test), https: 'https://open-q1.ezrpro.com', http: null}
+- {name: UCloud, https: 'https://open-up.ezrpro.com', http: 'http://open-up.ezrpro.com'}
+- {name: QCloud (production), https: 'https://open-tp.ezrpro.com', http: 'http://open-tp.ezrpro.com'}
+- {name: KOS 测试环境 (test), https: 'https://open-kos-q1.ezrpro.com', http: null}
+- {name: KOS QCloud (production), https: 'https://open-kos-tp.ezrpro.com', http: null}
+gaps:
+  - No OAuth 2.0, OIDC, or scoped tokens — a single long-lived Token per brand.
+  - No published token rotation or revocation procedure.
+  - Plaintext HTTP endpoints are published alongside HTTPS for the UCloud and QCloud environments.
+  - The Token is never transmitted, which is a genuine strength of the scheme.

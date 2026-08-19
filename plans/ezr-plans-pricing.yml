@@ -1,0 +1,33 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.ezrpro.com/
+note: >-
+  EZR publishes no pricing of any kind — not for the SCRM platform and not for the Open
+  Platform. There is no pricing page, no plan tiers, no published quota or overage, and no
+  self-service purchase path. Every route to the product is a contact form or a phone number.
+  API access is provisioned by an account manager, who also sets the rate ceiling
+  ("具体上限请咨询客户经理"), which means even the technical limits are commercially negotiated
+  rather than published. Recording plan_count: 0 is the finding, not an omission.
+plan_count: 0
+plans: []
+pricing_model: contact-sales
+self_service: false
+free_tier: false
+trial: false
+currency: null
+api_billing:
+  metered: unknown
+  included_with_platform: unknown
+  note: >-
+    Whether Open Platform access carries a separate charge from the SCRM platform licence is
+    not stated anywhere public. The developer guide's onboarding step is "申请商家代码AppID"
+    from EZR, with no commercial terms attached.
+acquisition:
+  route: https://www.ezrpro.com/contact
+  gate: sales / account manager
+probed:
+- {url: 'https://www.ezrpro.com/pricing', status: 200, result: SPA soft-404 shell (7,070 bytes, identical to every unknown path)}
+- {url: 'https://www.ezrpro.com/price', status: 200, result: SPA soft-404 shell}
+- {url: 'https://www.ezrpro.com/', status: 200, result: 'no pricing link in navigation; CTAs route to 预约演示 / contact'}
+- {url: 'https://open.ezrpro.com/', status: 200, result: 'developer portal — solutions, docs, tools; no pricing section'}
+checked: '2026-08-13'

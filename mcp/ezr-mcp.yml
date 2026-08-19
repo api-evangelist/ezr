@@ -1,0 +1,1266 @@
+generated: '2026-08-13'
+method: derived
+source: https://open.ezrpro.com/api/Book
+status: candidate
+note: >-
+  EZR ships NO MCP server. Searched the developer portal, the company site, npm
+  (@modelcontextprotocol and vendor scopes), and public MCP registries — nothing. The tool
+  list below is a CANDIDATE derived by API Evangelist from the 205 third-party-to-EZR
+  interfaces in the provider's published reference; it is a design input, not something EZR
+  operates, and no MCPServer pointer is wired into apis.yml for that reason. The 31
+  EZR-to-integrator push callbacks are excluded — they are not callable tools; see
+  asyncapi/ezr-webhooks.yml.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: api-key
+  auth_note: >-
+    Any future server would have to hold the AppId/Token/AppSystem triple and compute the
+    uppercase SHA1/MD5 request signature server-side; the Token must never reach the agent.
+  verified: searched
+searched:
+- {source: "https://open.ezrpro.com/#/apiFile", result: no MCP page; the only agent artifact is the packaged Agent Skill}
+- {source: "https://www.ezrpro.com/", result: no MCP mention}
+- {source: npm, result: no @ezr / ezrpro MCP package}
+- {source: public MCP registries, result: no EZR entry}
+related_agent_surface:
+  kind: Agent Skill
+  artifact: skills/_index.yml
+  note: >-
+    EZR chose to ship a code-generating Agent Skill rather than an MCP server. The skill
+    generates .NET client code for a developer to compile; it does not let an agent call the
+    API at runtime. These are different products and should not be conflated.
+candidate_tool_count: 205
+candidate_tools:
+- name: ezr_110508
+  interface: "110508"
+  description: "110508-查询付费卡列表"
+  domain: "会员主数据"
+  route: "/api/VipCard/QueryPayCardList"
+  input_schema_source: https://open.ezrpro.com/api/Doc/600547 (ReqParam tree)
+- name: ezr_110509
+  interface: "110509"
+  description: "110509 -购买付费卡"
+  domain: "会员主数据"
+  route: "/api/VipCard/BuyPayCard"
+  input_schema_source: https://open.ezrpro.com/api/Doc/600548 (ReqParam tree)
+- name: ezr_110510
+  interface: "110510"
+  description: "110510-退款（禁用）付费会员卡"
+  domain: "会员主数据"
+  route: "/api/VipCard/RefundPayCard"
+  input_schema_source: https://open.ezrpro.com/api/Doc/600549 (ReqParam tree)
+- name: ezr_1187
+  interface: "1187"
+  description: "1187-解绑会员微信-弃用"
+  domain: "会员主数据"
+  route: "api/cvip/unbindwx"
+  input_schema_source: https://open.ezrpro.com/api/Doc/67 (ReqParam tree)
+- name: ezr_1189
+  interface: "1189"
+  description: "1189-拉粉接口"
+  domain: "会员主数据"
+  route: "api/cvip/fansadd"
+  input_schema_source: https://open.ezrpro.com/api/Doc/53 (ReqParam tree)
+- name: ezr_1190
+  interface: "1190"
+  description: "1190-会员注册"
+  domain: "会员主数据"
+  route: "api/cvip/regvip"
+  input_schema_source: https://open.ezrpro.com/api/Doc/48 (ReqParam tree)
+- name: ezr_1195
+  interface: "1195"
+  description: "1195-会员卡合并"
+  domain: "会员主数据"
+  route: "/api/cvip/VipMerge"
+  input_schema_source: https://open.ezrpro.com/api/Doc/471 (ReqParam tree)
+- name: ezr_1201
+  interface: "1201"
+  description: "1201-上传会员信息"
+  domain: "会员主数据"
+  route: "api/cvip/vipadd"
+  input_schema_source: https://open.ezrpro.com/api/Doc/46 (ReqParam tree)
+- name: ezr_12011
+  interface: "12011"
+  description: "12011-会员注销"
+  domain: "会员主数据"
+  route: "api/cvip/shut"
+  input_schema_source: https://open.ezrpro.com/api/Doc/455 (ReqParam tree)
+- name: ezr_1202
+  interface: "1202"
+  description: "1202-修改会员信息"
+  domain: "会员主数据"
+  route: "api/cvip/vipupdate"
+  input_schema_source: https://open.ezrpro.com/api/Doc/45 (ReqParam tree)
+- name: ezr_120201
+  interface: "120201"
+  description: "120201-会员线下卡号变更"
+  domain: "会员主数据"
+  route: "api/cvip/VipOldCodeChange"
+  input_schema_source: https://open.ezrpro.com/api/Doc/50495 (ReqParam tree)
+- name: ezr_120202
+  interface: "120202"
+  description: "120202-服务关系变更"
+  domain: "会员主数据"
+  route: "api/cvip/bindservice"
+  input_schema_source: https://open.ezrpro.com/api/Doc/50502 (ReqParam tree)
+- name: ezr_120203
+  interface: "120203"
+  description: "120203-获取会员生日修改次数"
+  domain: "会员主数据"
+  route: "api/cvip/GetBirthdayEditNums"
+  input_schema_source: https://open.ezrpro.com/api/Doc/50509 (ReqParam tree)
+- name: ezr_1203
+  interface: "1203"
+  description: "1203-查询会员信息"
+  domain: "会员主数据"
+  route: "api/cvip/vipget"
+  input_schema_source: https://open.ezrpro.com/api/Doc/42 (ReqParam tree)
+- name: ezr_1207
+  interface: "1207"
+  description: "1207-上传等级变动"
+  domain: "会员主数据"
+  route: "api/cvip/vipgradeupdate"
+  input_schema_source: https://open.ezrpro.com/api/Doc/44 (ReqParam tree)
+- name: ezr_1208
+  interface: "1208"
+  description: "1208-会员升级需要消费数据上传"
+  domain: "会员主数据"
+  route: "api/cvip/VipGradeNeed"
+  input_schema_source: https://open.ezrpro.com/api/Doc/52 (ReqParam tree)
+- name: ezr_1225
+  interface: "1225"
+  description: "1225-添加/修改会员标签信息（品牌标签）"
+  domain: "会员主数据"
+  route: "api/cvip/updatetags"
+  input_schema_source: https://open.ezrpro.com/api/Doc/58 (ReqParam tree)
+- name: ezr_1226
+  interface: "1226"
+  description: "1226-修改会员扩展属性"
+  domain: "会员主数据"
+  route: "api/cvip/updateextends"
+  input_schema_source: https://open.ezrpro.com/api/Doc/393 (ReqParam tree)
+- name: ezr_1227
+  interface: "1227"
+  description: "1227-获取会员标签信息"
+  domain: "会员主数据"
+  route: "api/cvip/gettags"
+  input_schema_source: https://open.ezrpro.com/api/Doc/63 (ReqParam tree)
+- name: ezr_1228
+  interface: "1228"
+  description: "1228-会员扩展信息查询"
+  domain: "会员主数据"
+  route: "api/cvip/GetExtends"
+  input_schema_source: https://open.ezrpro.com/api/Doc/65 (ReqParam tree)
+- name: ezr_1229
+  interface: "1229"
+  description: "1229-批量添加/修改会员标签信息（品牌标签）"
+  domain: "会员主数据"
+  route: "api/cvip/UpdateBatchTags"
+  input_schema_source: https://open.ezrpro.com/api/Doc/425 (ReqParam tree)
+- name: ezr_1230
+  interface: "1230"
+  description: "1230-获取会员消费习惯"
+  domain: "会员主数据"
+  route: "api/cvip/getbehavior"
+  input_schema_source: https://open.ezrpro.com/api/Doc/426 (ReqParam tree)
+- name: ezr_1238
+  interface: "1238"
+  description: "1238-会员绑定企微员工"
+  domain: "会员主数据"
+  route: "api/cvip/getbindusers"
+  input_schema_source: https://open.ezrpro.com/api/Doc/416 (ReqParam tree)
+- name: ezr_1242
+  interface: "1242"
+  description: "1242-会员卡号置换"
+  domain: "会员主数据"
+  route: "/api/vipcard/GetVipCardCode"
+  input_schema_source: https://open.ezrpro.com/api/Doc/436 (ReqParam tree)
+- name: ezr_1245
+  interface: "1245"
+  description: "1245-会员池查询接口"
+  domain: "会员主数据"
+  route: "api/cvip/VipPoolGet"
+  input_schema_source: https://open.ezrpro.com/api/Doc/442 (ReqParam tree)
+- name: ezr_1246
+  interface: "1246"
+  description: "1246-根据订单号查询会员信息"
+  domain: "会员主数据"
+  route: "api/cvip/VipGetByOrderCode"
+  input_schema_source: https://open.ezrpro.com/api/Doc/441 (ReqParam tree)
+- name: ezr_1248
+  interface: "1248"
+  description: "1248-获取品牌会员卡动态码"
+  domain: "会员主数据"
+  route: "api/VipCard/GetVipCardDynamicCode"
+  input_schema_source: https://open.ezrpro.com/api/Doc/50497 (ReqParam tree)
+- name: ezr_1317
+  interface: "1317"
+  description: "1317-品牌标签获取"
+  domain: "会员主数据"
+  route: "api/cvip/BrandVipTagsGet"
+  input_schema_source: https://open.ezrpro.com/api/Doc/449 (ReqParam tree)
+- name: ezr_1500
+  interface: "1500"
+  description: "1500-上传潜客信息"
+  domain: "会员主数据"
+  route: "api/customer/add"
+  input_schema_source: https://open.ezrpro.com/api/Doc/457 (ReqParam tree)
+- name: ezr_1501
+  interface: "1501"
+  description: "1501-维护会员裂变关系"
+  domain: "会员主数据"
+  route: "api/customer/updateextendsbatch"
+  input_schema_source: https://open.ezrpro.com/api/Doc/458 (ReqParam tree)
+- name: ezr_1506
+  interface: "1506"
+  description: "1506-新增人群包"
+  domain: "会员主数据"
+  route: "api/cvip/AddVipGrp"
+  input_schema_source: https://open.ezrpro.com/api/Doc/474 (ReqParam tree)
+- name: ezr_1507
+  interface: "1507"
+  description: "1507-追加人群包会员信息"
+  domain: "会员主数据"
+  route: "api/cvip/VipGrpTagsImport"
+  input_schema_source: https://open.ezrpro.com/api/Doc/475 (ReqParam tree)
+- name: ezr_1508
+  interface: "1508"
+  description: "1508-批量操作扩展属性"
+  domain: "会员主数据"
+  route: "api/cvip/updatebatchextends"
+  input_schema_source: https://open.ezrpro.com/api/Doc/479 (ReqParam tree)
+- name: ezr_1510
+  interface: "1510"
+  description: "1510-查询会员分组列表"
+  domain: "会员主数据"
+  route: "api/cvip/getvipgrpinfo"
+  input_schema_source: https://open.ezrpro.com/api/Doc/50490 (ReqParam tree)
+- name: ezr_1511
+  interface: "1511"
+  description: "1511-查询会员分组中会员列表"
+  domain: "会员主数据"
+  route: "api/cvip/getvipgrpviplist"
+  input_schema_source: https://open.ezrpro.com/api/Doc/50491 (ReqParam tree)
+- name: ezr_1514
+  interface: "1514"
+  description: "1514-查询会员等级变更记录"
+  domain: "会员主数据"
+  route: "/api/cvip/VipGradeLogGetList"
+  input_schema_source: https://open.ezrpro.com/api/Doc/50523 (ReqParam tree)
+- name: ezr_1520
+  interface: "1520"
+  description: "1520-会员与导购关系查询接口"
+  domain: "会员主数据"
+  route: "api/cvip/GetVipUsers"
+  input_schema_source: https://open.ezrpro.com/api/Doc/50498 (ReqParam tree)
+- name: ezr_1909
+  interface: "1909"
+  description: "1909-获取计算等级升级保级"
+  domain: "会员主数据"
+  route: "api/CVip/GetCalcVipGradeInfo"
+  input_schema_source: https://open.ezrpro.com/api/Doc/50522 (ReqParam tree)
+- name: ezr_1119
+  interface: "1119"
+  description: "1119-第三方券转赠"
+  domain: "会员券"
+  route: "api/ccoup/change"
+  input_schema_source: https://open.ezrpro.com/api/Doc/401 (ReqParam tree)
+- name: ezr_1120
+  interface: "1120"
+  description: "1120-券有效期变更"
+  domain: "会员券"
+  route: "api/CCoup/validdatechange"
+  input_schema_source: https://open.ezrpro.com/api/Doc/470 (ReqParam tree)
+- name: ezr_1239
+  interface: "1239"
+  description: "1239-查询会员购卡信息"
+  domain: "会员券"
+  route: "api/pbase/GetPayCardPageList"
+  input_schema_source: https://open.ezrpro.com/api/Doc/397 (ReqParam tree)
+- name: ezr_1298
+  interface: "1298"
+  description: "1298-券锁定状态更改"
+  domain: "会员券"
+  route: "api/ccoup/couplockstatuschange"
+  input_schema_source: https://open.ezrpro.com/api/Doc/85 (ReqParam tree)
+- name: ezr_1300
+  interface: "1300"
+  description: "1300-上传券核销信息"
+  domain: "会员券"
+  route: "api/cvip/coupstatussync"
+  input_schema_source: https://open.ezrpro.com/api/Doc/71 (ReqParam tree)
+- name: ezr_1301
+  interface: "1301"
+  description: "1301-查询优惠券信息"
+  domain: "会员券"
+  route: "api/ccoup/coupscan"
+  input_schema_source: https://open.ezrpro.com/api/Doc/73 (ReqParam tree)
+- name: ezr_1302
+  interface: "1302"
+  description: "1302-在线核销优惠券"
+  domain: "会员券"
+  route: "api/ccoup/coupuse"
+  input_schema_source: https://open.ezrpro.com/api/Doc/72 (ReqParam tree)
+- name: ezr_1303
+  interface: "1303"
+  description: "1303-上传会员优惠券"
+  domain: "会员券"
+  route: "api/cvip/coupsend"
+  input_schema_source: https://open.ezrpro.com/api/Doc/74 (ReqParam tree)
+- name: ezr_1307
+  interface: "1307"
+  description: "1307-第三方查询会员可用券"
+  domain: "会员券"
+  route: "api/ccoup/coupget"
+  input_schema_source: https://open.ezrpro.com/api/Doc/76 (ReqParam tree)
+- name: ezr_1308
+  interface: "1308"
+  description: "1308-取消券核销"
+  domain: "会员券"
+  route: "api/ccoup/CoupCancelUse"
+  input_schema_source: https://open.ezrpro.com/api/Doc/91 (ReqParam tree)
+- name: ezr_1309
+  interface: "1309"
+  description: "1309-第三方新增券库（调用ezr接口新增券库）"
+  domain: "会员券"
+  route: "api/ccoup/coupgrpadd"
+  input_schema_source: https://open.ezrpro.com/api/Doc/82 (ReqParam tree)
+- name: ezr_1311
+  interface: "1311"
+  description: "1311-券库信息查询"
+  domain: "会员券"
+  route: "api/ccoup/CoupGrpQuery"
+  input_schema_source: https://open.ezrpro.com/api/Doc/86 (ReqParam tree)
+- name: ezr_1313
+  interface: "1313"
+  description: "1313-第三方批量发放券"
+  domain: "会员券"
+  route: "api/cvip/coupbatchsend"
+  input_schema_source: https://open.ezrpro.com/api/Doc/83 (ReqParam tree)
+- name: ezr_1314
+  interface: "1314"
+  description: "1314-券库修改接口"
+  domain: "会员券"
+  route: "api/CCoup/CoupGrpEdit"
+  input_schema_source: https://open.ezrpro.com/api/Doc/90 (ReqParam tree)
+- name: ezr_1315
+  interface: "1315"
+  description: "1315-批量查询券库"
+  domain: "会员券"
+  route: "api/ccoup/coupgrpquerybatch"
+  input_schema_source: https://open.ezrpro.com/api/Doc/400 (ReqParam tree)
+- name: ezr_1318
+  interface: "1318"
+  description: "1318-第三方查询会员可用券分页"
+  domain: "会员券"
+  route: "api/ccoup/GetListPage"
+  input_schema_source: https://open.ezrpro.com/api/Doc/443 (ReqParam tree)
+- name: ezr_1320
+  interface: "1320"
+  description: "1320-券禁用接口"
+  domain: "会员券"
+  route: "api/ccoup/couponoperate"
+  input_schema_source: https://open.ezrpro.com/api/Doc/80 (ReqParam tree)
+- name: ezr_1321
+  interface: "1321"
+  description: "1321-会员可用券活动列表查询"
+  domain: "会员券"
+  route: "api/ccoup/getcoupactlist"
+  input_schema_source: https://open.ezrpro.com/api/Doc/447 (ReqParam tree)
+- name: ezr_1322
+  interface: "1322"
+  description: "1322-会员券领取"
+  domain: "会员券"
+  route: "api/ccoup/Receive"
+  input_schema_source: https://open.ezrpro.com/api/Doc/446 (ReqParam tree)
+- name: ezr_1323
+  interface: "1323"
+  description: "1323-外部拉粉并上传优惠券"
+  domain: "会员券"
+  route: "api/CVip/CoupSendAsync"
+  input_schema_source: https://open.ezrpro.com/api/Doc/88 (ReqParam tree)
+- name: ezr_1700
+  interface: "1700"
+  description: "1700-外部系统发券(EZR生成券号)"
+  domain: "会员券"
+  route: "api/cvip/CoupBatchSendOth"
+  input_schema_source: https://open.ezrpro.com/api/Doc/472 (ReqParam tree)
+- name: ezr_11006
+  interface: "11006"
+  description: "11006-京东线下积分增量写入"
+  domain: "会员积分"
+  route: "api/v-jd/cvip/VipBonusTransUpdate"
+  input_schema_source: https://open.ezrpro.com/api/Doc/27 (ReqParam tree)
+- name: ezr_11007
+  interface: "11007"
+  description: "11007-线下积分明细查询"
+  domain: "会员积分"
+  route: "api/v-jd/cvip/GetVipBonusDetail"
+  input_schema_source: https://open.ezrpro.com/api/Doc/26 (ReqParam tree)
+- name: ezr_1107
+  interface: "1107"
+  description: "1107-积分兑券活动查询"
+  domain: "会员积分"
+  route: "api/cvip/vipbonusgetlist"
+  input_schema_source: https://open.ezrpro.com/api/Doc/23 (ReqParam tree)
+- name: ezr_1188
+  interface: "1188"
+  description: "1188-会员最终可用积分修改"
+  domain: "会员积分"
+  route: "api/cvip/vipBonusFinalBatchSet"
+  input_schema_source: https://open.ezrpro.com/api/Doc/22 (ReqParam tree)
+- name: ezr_1197
+  interface: "1197"
+  description: "1197-用户积分流水批量上传"
+  domain: "会员积分"
+  route: "api/cvip/vipbonusbatchset"
+  input_schema_source: https://open.ezrpro.com/api/Doc/20 (ReqParam tree)
+- name: ezr_11971
+  interface: "11971"
+  description: "11971-多用户积分流水批量上传"
+  domain: "会员积分"
+  route: "api/cvip/VipsBonusBatchSetList"
+  input_schema_source: https://open.ezrpro.com/api/Doc/24 (ReqParam tree)
+- name: ezr_12001
+  interface: "12001"
+  description: "12001-淘宝绑定会员"
+  domain: "会员积分"
+  route: "api/v-taobao/cvip/vipbind"
+  input_schema_source: https://open.ezrpro.com/api/Doc/50506 (ReqParam tree)
+- name: ezr_12005
+  interface: "12005"
+  description: "12005-积分兑换活动增减积分"
+  domain: "会员积分"
+  route: "api/v-taobao/cvip/VipBonusTransUpdate"
+  input_schema_source: https://open.ezrpro.com/api/Doc/28 (ReqParam tree)
+- name: ezr_1204
+  interface: "1204"
+  description: "1204-查询会员积分"
+  domain: "会员积分"
+  route: "api/cvip/vipbonusget"
+  input_schema_source: https://open.ezrpro.com/api/Doc/16 (ReqParam tree)
+- name: ezr_12041
+  interface: "12041"
+  description: "12041-获取订单明细积分"
+  domain: "会员积分"
+  route: "api/cvip/VipBonusGetBySale"
+  input_schema_source: https://open.ezrpro.com/api/Doc/394 (ReqParam tree)
+- name: ezr_1205
+  interface: "1205"
+  description: "1205-会员积分兑换接口"
+  domain: "会员积分"
+  route: "api/cvip/VipBonusUpdate"
+  input_schema_source: https://open.ezrpro.com/api/Doc/29 (ReqParam tree)
+- name: ezr_1206
+  interface: "1206"
+  description: "1206-上传积分流水"
+  domain: "会员积分"
+  route: "api/cvip/vipbonusset"
+  input_schema_source: https://open.ezrpro.com/api/Doc/15 (ReqParam tree)
+- name: ezr_1209
+  interface: "1209"
+  description: "1209-积分申请异步回掉接口"
+  domain: "会员积分"
+  route: "api/cvip/VipBonusApplyBackSync"
+  input_schema_source: https://open.ezrpro.com/api/Doc/25 (ReqParam tree)
+- name: ezr_1224
+  interface: "1224"
+  description: "1224-在线扣减积分"
+  domain: "会员积分"
+  route: "api/cvip/vipbonustransupdate"
+  input_schema_source: https://open.ezrpro.com/api/Doc/21 (ReqParam tree)
+- name: ezr_1232
+  interface: "1232"
+  description: "1232-积分锁定"
+  domain: "会员积分"
+  route: "api/cvip/lockbonus"
+  input_schema_source: https://open.ezrpro.com/api/Doc/30 (ReqParam tree)
+- name: ezr_1233
+  interface: "1233"
+  description: "1233-积分解锁"
+  domain: "会员积分"
+  route: "api/cvip/unlockbonus"
+  input_schema_source: https://open.ezrpro.com/api/Doc/31 (ReqParam tree)
+- name: ezr_1234
+  interface: "1234"
+  description: "1234-消费已锁定积分"
+  domain: "会员积分"
+  route: "api/cvip/uselockbonus"
+  input_schema_source: https://open.ezrpro.com/api/Doc/32 (ReqParam tree)
+- name: ezr_1235
+  interface: "1235"
+  description: "1235-会员门店权益查询"
+  domain: "会员积分"
+  route: "api/cvip/shopinterestget"
+  input_schema_source: https://open.ezrpro.com/api/Doc/399 (ReqParam tree)
+- name: ezr_1244
+  interface: "1244"
+  description: "1244-查询会员积分分页"
+  domain: "会员积分"
+  route: "api/cvip/GetBonusPage"
+  input_schema_source: https://open.ezrpro.com/api/Doc/444 (ReqParam tree)
+- name: ezr_1249
+  interface: "1249"
+  description: "1249-查询会员过期积分"
+  domain: "会员积分"
+  route: "api/cvip/vipexpirebonusget"
+  input_schema_source: https://open.ezrpro.com/api/Doc/50504 (ReqParam tree)
+- name: ezr_1316
+  interface: "1316"
+  description: "1316-积分兑换比例扩展查询"
+  domain: "会员积分"
+  route: "api/cvip/bonussellextend"
+  input_schema_source: https://open.ezrpro.com/api/Doc/398 (ReqParam tree)
+- name: ezr_1600
+  interface: "1600"
+  description: "1600-丽金积分抵现"
+  domain: "会员积分"
+  route: "api/bonus/getusestatistics"
+  input_schema_source: https://open.ezrpro.com/api/Doc/456 (ReqParam tree)
+- name: ezr_1602
+  interface: "1602"
+  description: "1602-订单积分抵现预览"
+  domain: "会员积分"
+  route: "/api/bonus/discountpre"
+  input_schema_source: https://open.ezrpro.com/api/Doc/50492 (ReqParam tree)
+- name: ezr_1603
+  interface: "1603"
+  description: "1603-订单预览后抵现"
+  domain: "会员积分"
+  route: "/api/bonus/discountuse"
+  input_schema_source: https://open.ezrpro.com/api/Doc/50493 (ReqParam tree)
+- name: ezr_1604
+  interface: "1604"
+  description: "1604-退还订单抵现积分"
+  domain: "会员积分"
+  route: "/api/bonus/discountrtadd"
+  input_schema_source: https://open.ezrpro.com/api/Doc/50494 (ReqParam tree)
+- name: ezr_1605
+  interface: "1605"
+  description: "1605-获取丽金/积分抵现验证码"
+  domain: "会员积分"
+  route: "api/Bonus/GetVipBonusCode"
+  input_schema_source: https://open.ezrpro.com/api/Doc/50496 (ReqParam tree)
+- name: ezr_1000
+  interface: "1000"
+  description: "1000-上传门店信息"
+  domain: "基础数据"
+  route: "api/pbase/shopupload"
+  input_schema_source: https://open.ezrpro.com/api/Doc/4 (ReqParam tree)
+- name: ezr_1001
+  interface: "1001"
+  description: "1001-上传用户信息"
+  domain: "基础数据"
+  route: "api/pbase/userupload"
+  input_schema_source: https://open.ezrpro.com/api/Doc/2 (ReqParam tree)
+- name: ezr_1002
+  interface: "1002"
+  description: "1002-上传店群信息"
+  domain: "基础数据"
+  route: "api/pbase/shopgrpupload"
+  input_schema_source: https://open.ezrpro.com/api/Doc/8 (ReqParam tree)
+- name: ezr_1003
+  interface: "1003"
+  description: "1003-上传片区信息"
+  domain: "基础数据"
+  route: "api/pbase/shopdistrictupload"
+  input_schema_source: https://open.ezrpro.com/api/Doc/9 (ReqParam tree)
+- name: ezr_1004
+  interface: "1004"
+  description: "1004-注销门店信息"
+  domain: "基础数据"
+  route: "api/pbase/shopshut"
+  input_schema_source: https://open.ezrpro.com/api/Doc/3 (ReqParam tree)
+- name: ezr_1005
+  interface: "1005"
+  description: "1005-注销用户信息"
+  domain: "基础数据"
+  route: "api/pbase/usershut"
+  input_schema_source: https://open.ezrpro.com/api/Doc/5 (ReqParam tree)
+- name: ezr_100601
+  interface: "100601"
+  description: "100601-查询员工信息"
+  domain: "基础数据"
+  route: "api/PBase/GetUserInfo"
+  input_schema_source: https://open.ezrpro.com/api/Doc/395 (ReqParam tree)
+- name: ezr_1010
+  interface: "1010"
+  description: "1010-店铺数据获取"
+  domain: "基础数据"
+  route: "api/pbase/shopgetlst"
+  input_schema_source: https://open.ezrpro.com/api/Doc/1 (ReqParam tree)
+- name: ezr_1011
+  interface: "1011"
+  description: "1011-行政区域数据获取"
+  domain: "基础数据"
+  route: "api/pbase/areagetlst"
+  input_schema_source: https://open.ezrpro.com/api/Doc/396 (ReqParam tree)
+- name: ezr_1012
+  interface: "1012"
+  description: "1012-门店详情"
+  domain: "基础数据"
+  route: "api/pbase/GetShopDetail"
+  input_schema_source: https://open.ezrpro.com/api/Doc/428 (ReqParam tree)
+- name: ezr_1032
+  interface: "1032"
+  description: "1032-门店设置上架接口"
+  domain: "基础数据"
+  route: "api/pbase/ShopAutoActive"
+  input_schema_source: https://open.ezrpro.com/api/Doc/10 (ReqParam tree)
+- name: ezr_1103
+  interface: "1103"
+  description: "1103-上传基础商品(已废弃)"
+  domain: "基础数据"
+  route: "api/pbase/prodcrmupload"
+  input_schema_source: https://open.ezrpro.com/api/Doc/7 (ReqParam tree)
+- name: ezr_1104
+  interface: "1104"
+  description: "1104-上传基础商品"
+  domain: "基础数据"
+  route: "api/pbase/ProdUploadMethod"
+  input_schema_source: https://open.ezrpro.com/api/Doc/11 (ReqParam tree)
+- name: ezr_1108
+  interface: "1108"
+  description: "1108-商品中心通过SKU更改属性接入"
+  domain: "基础数据"
+  route: "api/pbase/ProdAttrJsonUploadMethod"
+  input_schema_source: https://open.ezrpro.com/api/Doc/482 (ReqParam tree)
+- name: ezr_13211
+  interface: "13211"
+  description: "13211-获取活动详情"
+  domain: "基础数据"
+  route: "api/ccoup/getcoupactdetail"
+  input_schema_source: https://open.ezrpro.com/api/Doc/448 (ReqParam tree)
+- name: ezr_14026
+  interface: "14026"
+  description: "14026-商品属性查询"
+  domain: "基础数据"
+  route: "/api/MProd/QueryProdAttr"
+  input_schema_source: https://open.ezrpro.com/api/Doc/50520 (ReqParam tree)
+- name: ezr_1502
+  interface: "1502"
+  description: "1502-登录凭证校验"
+  domain: "基础数据"
+  route: "api/weixinutil/code2Session"
+  input_schema_source: https://open.ezrpro.com/api/Doc/50514 (ReqParam tree)
+- name: ezr_1801
+  interface: "1801"
+  description: "1801-商品主数据变更"
+  domain: "基础数据"
+  route: "api/pbase/prodedit"
+  input_schema_source: https://open.ezrpro.com/api/Doc/50516 (ReqParam tree)
+- name: ezr_50004
+  interface: "50004"
+  description: "50004-获取导购二维码"
+  domain: "基础数据"
+  route: "api/Wxwork/GetInviteUrl"
+  input_schema_source: https://open.ezrpro.com/api/Doc/50501 (ReqParam tree)
+- name: ezr_1007
+  interface: "1007"
+  description: "1007-图片上传"
+  domain: "微商城"
+  route: "api/pbase/addimg"
+  input_schema_source: https://open.ezrpro.com/api/Doc/170 (ReqParam tree)
+- name: ezr_1008
+  interface: "1008"
+  description: "1008-视频上传"
+  domain: "微商城"
+  route: "api/pbase/BigFileUpload"
+  input_schema_source: https://open.ezrpro.com/api/Doc/50517 (ReqParam tree)
+- name: ezr_14003
+  interface: "14003"
+  description: "14003-查询门店在售商品"
+  domain: "微商城"
+  route: "api/mprod/ProdShopSkusGetByStatus"
+  input_schema_source: https://open.ezrpro.com/api/Doc/161 (ReqParam tree)
+- name: ezr_14004
+  interface: "14004"
+  description: "14004-门店商品修改库存(已废弃)"
+  domain: "微商城"
+  route: "api/mprod/UnCheckShopProdStocks"
+  input_schema_source: https://open.ezrpro.com/api/Doc/160 (ReqParam tree)
+- name: ezr_14005
+  interface: "14005"
+  description: "14005-修改商品价格"
+  domain: "微商城"
+  route: "api/mprod/UpdateProdPrice"
+  input_schema_source: https://open.ezrpro.com/api/Doc/159 (ReqParam tree)
+- name: ezr_14006
+  interface: "14006"
+  description: "14006-门店商品修改价格"
+  domain: "微商城"
+  route: "api/mprod/ShopProdPrice"
+  input_schema_source: https://open.ezrpro.com/api/Doc/157 (ReqParam tree)
+- name: ezr_14007
+  interface: "14007"
+  description: "14007-上传门店商品库存（已废弃）"
+  domain: "微商城"
+  route: "api/mprod/ShopProdStocks"
+  input_schema_source: https://open.ezrpro.com/api/Doc/156 (ReqParam tree)
+- name: ezr_14008
+  interface: "14008"
+  description: "14008-修改门店商品可售状态"
+  domain: "微商城"
+  route: "api/mprod/ShopProdOnSale"
+  input_schema_source: https://open.ezrpro.com/api/Doc/155 (ReqParam tree)
+- name: ezr_14009
+  interface: "14009"
+  description: "14009-上传门店商品（已废弃）"
+  domain: "微商城"
+  route: "api/mprod/ShopProdBatchAdd"
+  input_schema_source: https://open.ezrpro.com/api/Doc/154 (ReqParam tree)
+- name: ezr_14010
+  interface: "14010"
+  description: "14010-仓商品库存更新"
+  domain: "微商城"
+  route: "api/warehouse/stockupdate"
+  input_schema_source: https://open.ezrpro.com/api/Doc/180 (ReqParam tree)
+- name: ezr_14011
+  interface: "14011"
+  description: "14011-订单自提核销"
+  domain: "微商城"
+  route: "api/morder/ConfirmSelfFetch"
+  input_schema_source: https://open.ezrpro.com/api/Doc/408 (ReqParam tree)
+- name: ezr_14018
+  interface: "14018"
+  description: "14018-仓商品查询"
+  domain: "微商城"
+  route: "api/warehouse/prdsearch"
+  input_schema_source: https://open.ezrpro.com/api/Doc/179 (ReqParam tree)
+- name: ezr_14019
+  interface: "14019"
+  description: "14019-仓\\门店绑定关系"
+  domain: "微商城"
+  route: "api/warehouse/warehousecasshopcode"
+  input_schema_source: https://open.ezrpro.com/api/Doc/181 (ReqParam tree)
+- name: ezr_14020
+  interface: "14020"
+  description: "14020-E店群商品上传"
+  domain: "微商城"
+  route: "api/warehouse/eshopprdadd"
+  input_schema_source: https://open.ezrpro.com/api/Doc/183 (ReqParam tree)
+- name: ezr_14021
+  interface: "14021"
+  description: "14021-仓门店商品添加"
+  domain: "微商城"
+  route: "api/warehouse/shopprdadd"
+  input_schema_source: https://open.ezrpro.com/api/Doc/182 (ReqParam tree)
+- name: ezr_14022
+  interface: "14022"
+  description: "14022-仓库商品上传（已废弃）"
+  domain: "微商城"
+  route: "api/warehouse/warehousepprdadd"
+  input_schema_source: https://open.ezrpro.com/api/Doc/184 (ReqParam tree)
+- name: ezr_14023
+  interface: "14023"
+  description: "14023-仓库存查询(含售价)"
+  domain: "微商城"
+  route: "api/warehouse/stocksearch"
+  input_schema_source: https://open.ezrpro.com/api/Doc/411 (ReqParam tree)
+- name: ezr_14024
+  interface: "14024"
+  description: "14024-仓商品库存查询(含售价)"
+  domain: "微商城"
+  route: "api/warehouse/prostocksearch"
+  input_schema_source: https://open.ezrpro.com/api/Doc/413 (ReqParam tree)
+- name: ezr_1800
+  interface: "1800"
+  description: "1800-查询仓商品列表"
+  domain: "微商城"
+  route: "api/warehouse/getprodlist"
+  input_schema_source: https://open.ezrpro.com/api/Doc/469 (ReqParam tree)
+- name: ezr_1901
+  interface: "1901"
+  description: "1901-代客订单已支付"
+  domain: "微商城"
+  route: "api/morder/paycomplete"
+  input_schema_source: https://open.ezrpro.com/api/Doc/477 (ReqParam tree)
+- name: ezr_1903
+  interface: "1903"
+  description: "1903-获取下单葵花码"
+  domain: "微商城"
+  route: "api/morder/getqrcode"
+  input_schema_source: https://open.ezrpro.com/api/Doc/50489 (ReqParam tree)
+- name: ezr_1905
+  interface: "1905"
+  description: "1905-根据换货单Ids获取换货单列表"
+  domain: "微商城"
+  route: "api/morder/getexchangelistbyids"
+  input_schema_source: https://open.ezrpro.com/api/Doc/600546 (ReqParam tree)
+- name: ezr_2004
+  interface: "2004"
+  description: "2004-上传商品分类"
+  domain: "微商城"
+  route: "api/mprod/categoryupload"
+  input_schema_source: https://open.ezrpro.com/api/Doc/144 (ReqParam tree)
+- name: ezr_2005
+  interface: "2005"
+  description: "2005-上传商品信息(已废弃)"
+  domain: "微商城"
+  route: "api/mprod/produpload"
+  input_schema_source: https://open.ezrpro.com/api/Doc/145 (ReqParam tree)
+- name: ezr_2005
+  interface: "2005"
+  description: "2005-商品下载"
+  domain: "微商城"
+  route: "api/MProd/ProdDown"
+  input_schema_source: https://open.ezrpro.com/api/Doc/158 (ReqParam tree)
+- name: ezr_2008
+  interface: "2008"
+  description: "2008-上传商品库存（已废弃）"
+  domain: "微商城"
+  route: "api/mprod/prodstocks"
+  input_schema_source: https://open.ezrpro.com/api/Doc/143 (ReqParam tree)
+- name: ezr_2009
+  interface: "2009"
+  description: "2009-查询在售商品-已弃用"
+  domain: "微商城"
+  route: "api/mprod/ProdSkusGetByStatus"
+  input_schema_source: https://open.ezrpro.com/api/Doc/151 (ReqParam tree)
+- name: ezr_2016
+  interface: "2016"
+  description: "2016-查询退款订单"
+  domain: "微商城"
+  route: "api/morder/ordrefundgetbatch"
+  input_schema_source: https://open.ezrpro.com/api/Doc/152 (ReqParam tree)
+- name: ezr_2017
+  interface: "2017"
+  description: "2017-退款查询"
+  domain: "微商城"
+  route: "api/morder/getorderref"
+  input_schema_source: https://open.ezrpro.com/api/Doc/454 (ReqParam tree)
+- name: ezr_2018
+  interface: "2018"
+  description: "2018-上传发货信息"
+  domain: "微商城"
+  route: "api/morder/ordsend"
+  input_schema_source: https://open.ezrpro.com/api/Doc/150 (ReqParam tree)
+- name: ezr_2021
+  interface: "2021"
+  description: "2021-查询退货订单(单个)"
+  domain: "微商城"
+  route: "api/morder/ordreturngetone"
+  input_schema_source: https://open.ezrpro.com/api/Doc/147 (ReqParam tree)
+- name: ezr_2022
+  interface: "2022"
+  description: "2022-查询退货订单(批量)"
+  domain: "微商城"
+  route: "api/morder/ordreturngetbatch"
+  input_schema_source: https://open.ezrpro.com/api/Doc/146 (ReqParam tree)
+- name: ezr_2023
+  interface: "2023"
+  description: "2023-查询商城订单(单个)"
+  domain: "微商城"
+  route: "api/morder/ordgetone"
+  input_schema_source: https://open.ezrpro.com/api/Doc/149 (ReqParam tree)
+- name: ezr_2024
+  interface: "2024"
+  description: "2024-查询商城订单(批量)"
+  domain: "微商城"
+  route: "api/morder/ordgetbatch"
+  input_schema_source: https://open.ezrpro.com/api/Doc/148 (ReqParam tree)
+- name: ezr_2026
+  interface: "2026"
+  description: "2026-查询商城订单简单版字段(批量)"
+  domain: "微商城"
+  route: "api/morder/ordgetsimplebatch"
+  input_schema_source: https://open.ezrpro.com/api/Doc/176 (ReqParam tree)
+- name: ezr_2027
+  interface: "2027"
+  description: "2027-编辑订单物流"
+  domain: "微商城"
+  route: "api/morder/editorderbycode"
+  input_schema_source: https://open.ezrpro.com/api/Doc/404 (ReqParam tree)
+- name: ezr_2028
+  interface: "2028"
+  description: "2028-编辑退货单物流"
+  domain: "微商城"
+  route: "api/morder/editrtorderbycode"
+  input_schema_source: https://open.ezrpro.com/api/Doc/405 (ReqParam tree)
+- name: ezr_2029
+  interface: "2029"
+  description: "2029-生成售后单"
+  domain: "微商城"
+  route: "api/morder/addaftersale"
+  input_schema_source: https://open.ezrpro.com/api/Doc/450 (ReqParam tree)
+- name: ezr_2031
+  interface: "2031"
+  description: "2031-商品分组列表"
+  domain: "微商城"
+  route: "api/mprod/CategoryList"
+  input_schema_source: https://open.ezrpro.com/api/Doc/476 (ReqParam tree)
+- name: ezr_2032
+  interface: "2032"
+  description: "2032-门店商品小程序二维码接口"
+  domain: "微商城"
+  route: "api/mprod/shopprodqrcode"
+  input_schema_source: https://open.ezrpro.com/api/Doc/412 (ReqParam tree)
+- name: ezr_2033
+  interface: "2033"
+  description: "2033-多店商品查询接口"
+  domain: "微商城"
+  route: "api/mprod/MultiShopProdSearch"
+  input_schema_source: https://open.ezrpro.com/api/Doc/166 (ReqParam tree)
+- name: ezr_2035
+  interface: "2035"
+  description: "2035-添加商品"
+  domain: "微商城"
+  route: "api/mprod/AddProduct"
+  input_schema_source: https://open.ezrpro.com/api/Doc/172 (ReqParam tree)
+- name: ezr_2037
+  interface: "2037"
+  description: "2037-获取分类"
+  domain: "微商城"
+  route: "api/mprod/getedcategory"
+  input_schema_source: https://open.ezrpro.com/api/Doc/171 (ReqParam tree)
+- name: ezr_2038
+  interface: "2038"
+  description: "2038-更改会员的线上退款订单状态"
+  domain: "微商城"
+  route: "api/morder/OrdRefundStatus"
+  input_schema_source: https://open.ezrpro.com/api/Doc/173 (ReqParam tree)
+- name: ezr_2039
+  interface: "2039"
+  description: "2039-商城订单优惠金额详情"
+  domain: "微商城"
+  route: "api/morder/OrdGetSaleAmount"
+  input_schema_source: https://open.ezrpro.com/api/Doc/178 (ReqParam tree)
+- name: ezr_2040
+  interface: "2040"
+  description: "2040-订单评价"
+  domain: "微商城"
+  route: "api/morder/getordercomment"
+  input_schema_source: https://open.ezrpro.com/api/Doc/409 (ReqParam tree)
+- name: ezr_2041
+  interface: "2041"
+  description: "2041-商城订单增加备注信息"
+  domain: "微商城"
+  route: "api/morder/ordremarkadd"
+  input_schema_source: https://open.ezrpro.com/api/Doc/410 (ReqParam tree)
+- name: ezr_2046
+  interface: "2046"
+  description: "2046-微商城订单状态查询(批量)"
+  domain: "微商城"
+  route: "api/morder/OrdStatusGetBatch"
+  input_schema_source: https://open.ezrpro.com/api/Doc/419 (ReqParam tree)
+- name: ezr_2047
+  interface: "2047"
+  description: "2047-微商城退货单状态查询(批量)"
+  domain: "微商城"
+  route: "api/morder/OrdReturnStatusGetBatch"
+  input_schema_source: https://open.ezrpro.com/api/Doc/420 (ReqParam tree)
+- name: ezr_2048
+  interface: "2048"
+  description: "2048-微商城退款单状态查询(批量)"
+  domain: "微商城"
+  route: "api/morder/OrdRefundStatusGetBatch"
+  input_schema_source: https://open.ezrpro.com/api/Doc/421 (ReqParam tree)
+- name: ezr_2050
+  interface: "2050"
+  description: "2050-营销云弹窗数据添加"
+  domain: "微商城"
+  route: "/api/mprod/AddPopupTouch"
+  input_schema_source: https://open.ezrpro.com/api/Doc/440 (ReqParam tree)
+- name: ezr_2051
+  interface: "2051"
+  description: "2051-退款管理"
+  domain: "微商城"
+  route: "api/morder/operationaftersale"
+  input_schema_source: https://open.ezrpro.com/api/Doc/451 (ReqParam tree)
+- name: ezr_21131
+  interface: "21131"
+  description: "21131-修改退款单金额"
+  domain: "微商城"
+  route: "api/morder/editrefmoneybyrefcode"
+  input_schema_source: https://open.ezrpro.com/api/Doc/406 (ReqParam tree)
+- name: ezr_21132
+  interface: "21132"
+  description: "21132-获取视频号小店接口调用凭证"
+  domain: "微商城"
+  route: "api/MiniShop/GetMiniShopToken"
+  input_schema_source: https://open.ezrpro.com/api/Doc/50503 (ReqParam tree)
+- name: ezr_3101
+  interface: "3101"
+  description: "3101-外部自提"
+  domain: "微商城"
+  route: "第三方提供"
+  input_schema_source: https://open.ezrpro.com/api/Doc/415 (ReqParam tree)
+- name: ezr_20051
+  interface: "20051"
+  description: "20051-商品查询"
+  domain: "微商城(外部商城分销)"
+  route: "api/mprod/searchcode"
+  input_schema_source: https://open.ezrpro.com/api/Doc/429 (ReqParam tree)
+- name: ezr_2020
+  interface: "2020"
+  description: "2020-上传退货状态"
+  domain: "微商城(外部商城分销)"
+  route: "api/morder/OrdReturnStatus"
+  input_schema_source: https://open.ezrpro.com/api/Doc/34 (ReqParam tree)
+- name: ezr_2030
+  interface: "2030"
+  description: "2030-上传平台订单"
+  domain: "微商城(外部商城分销)"
+  route: "api/morder/thirdOrdAdd"
+  input_schema_source: https://open.ezrpro.com/api/Doc/37 (ReqParam tree)
+- name: ezr_2034
+  interface: "2034"
+  description: "2034-佣金订单查询"
+  domain: "微商城(外部商城分销)"
+  route: "api/mfx/ordercommisionsearch"
+  input_schema_source: https://open.ezrpro.com/api/Doc/38 (ReqParam tree)
+- name: ezr_2044
+  interface: "2044"
+  description: "2044-获取活动链接"
+  domain: "微商城(外部商城分销)"
+  route: "api/mfx/FxActivityLinkUrlGet"
+  input_schema_source: https://open.ezrpro.com/api/Doc/424 (ReqParam tree)
+- name: ezr_2205
+  interface: "2205"
+  description: "2205-退款单号查询分销订单"
+  domain: "微商城(外部商城分销)"
+  route: "api/mfx/getfxorderbyorderinfo"
+  input_schema_source: https://open.ezrpro.com/api/Doc/418 (ReqParam tree)
+- name: ezr_2206
+  interface: "2206"
+  description: "2206-分销关系查询"
+  domain: "微商城(外部商城分销)"
+  route: "api/mfx/GetFxRelation"
+  input_schema_source: https://open.ezrpro.com/api/Doc/427 (ReqParam tree)
+- name: ezr_2018_1
+  interface: "2018-1"
+  description: "2018-1-发货物流公司编号枚举"
+  domain: "接口拓展信息"
+  route: "api/morder/ordsend"
+  input_schema_source: https://open.ezrpro.com/api/Doc/50538 (ReqParam tree)
+- name: ezr_99999
+  interface: "99999"
+  description: "99999-营销助手App接口格式"
+  domain: "接口拓展信息"
+  route: "api/xxx/xxx"
+  input_schema_source: https://open.ezrpro.com/api/Doc/50510 (ReqParam tree)
+- name: ezr_1030
+  interface: "1030"
+  description: "1030-请求短信发送"
+  domain: "消息接口"
+  route: "api/message/smsSend"
+  input_schema_source: https://open.ezrpro.com/api/Doc/102 (ReqParam tree)
+- name: ezr_4000
+  interface: "4000"
+  description: "4000-微信模板消息发送(EZR模板)"
+  domain: "消息接口"
+  route: "api/WXMessage/SendByTemp"
+  input_schema_source: https://open.ezrpro.com/api/Doc/103 (ReqParam tree)
+- name: ezr_2101
+  interface: "2101"
+  description: "2101-外部储值卡余额"
+  domain: "礼品卡"
+  route: "第三方提供"
+  input_schema_source: https://open.ezrpro.com/api/Doc/417 (ReqParam tree)
+- name: ezr_2102
+  interface: "2102"
+  description: "2102-外部储值卡流水查询"
+  domain: "礼品卡"
+  route: "第三方提供"
+  input_schema_source: https://open.ezrpro.com/api/Doc/414 (ReqParam tree)
+- name: ezr_5000
+  interface: "5000"
+  description: "5000-礼品卡使用"
+  domain: "礼品卡"
+  route: "api/wxgiftcard/UseWxGiftCard"
+  input_schema_source: https://open.ezrpro.com/api/Doc/126 (ReqParam tree)
+- name: ezr_5001
+  interface: "5001"
+  description: "5001-礼品卡核销"
+  domain: "礼品卡"
+  route: "api/wxgiftcard/ConsumeWxGiftCard"
+  input_schema_source: https://open.ezrpro.com/api/Doc/134 (ReqParam tree)
+- name: ezr_5002
+  interface: "5002"
+  description: "5002-储值礼品卡扣款信息查询"
+  domain: "礼品卡"
+  route: "api/wxgiftcard/GetWxGiftCardInfoByExternalOrderId"
+  input_schema_source: https://open.ezrpro.com/api/Doc/130 (ReqParam tree)
+- name: ezr_5002
+  interface: "5002"
+  description: "5002-微信礼品卡信息查询"
+  domain: "礼品卡"
+  route: "api/WxGiftCard/GetWxGiftCardInfo"
+  input_schema_source: https://open.ezrpro.com/api/Doc/452 (ReqParam tree)
+- name: ezr_5003
+  interface: "5003"
+  description: "5003-礼品卡查询"
+  domain: "礼品卡"
+  route: "api/wxgiftcard/GetSingleWxGiftCardInfoByCode"
+  input_schema_source: https://open.ezrpro.com/api/Doc/129 (ReqParam tree)
+- name: ezr_5004
+  interface: "5004"
+  description: "5004-礼品卡退卡（款）"
+  domain: "礼品卡"
+  route: "api/wxgiftcard/ReturnWxGiftCard"
+  input_schema_source: https://open.ezrpro.com/api/Doc/135 (ReqParam tree)
+- name: ezr_5007
+  interface: "5007"
+  description: "5007-储值卡退款"
+  domain: "礼品卡"
+  route: "api/wxgiftcard/RechargeWxGiftCard"
+  input_schema_source: https://open.ezrpro.com/api/Doc/131 (ReqParam tree)
+- name: ezr_5008
+  interface: "5008"
+  description: "5008-储值礼品卡批量使用扣减余额"
+  domain: "礼品卡"
+  route: "api/wxgiftcard/BatchUseWxGiftCard"
+  input_schema_source: https://open.ezrpro.com/api/Doc/132 (ReqParam tree)
+- name: ezr_5009
+  interface: "5009"
+  description: "5009-储值礼品卡退款信息查询"
+  domain: "礼品卡"
+  route: "api/wxgiftcard/GetWxGiftCardInfoByOriginalOrderId"
+  input_schema_source: https://open.ezrpro.com/api/Doc/136 (ReqParam tree)
+- name: ezr_5010
+  interface: "5010"
+  description: "5010-储值礼品卡批量退款"
+  domain: "礼品卡"
+  route: "api/wxgiftcard/BatchRechargeWxGiftCard"
+  input_schema_source: https://open.ezrpro.com/api/Doc/133 (ReqParam tree)
+- name: ezr_5011
+  interface: "5011"
+  description: "5011-储值卡流水"
+  domain: "礼品卡"
+  route: "api/wxgiftcard/addgiftcarduselog"
+  input_schema_source: https://open.ezrpro.com/api/Doc/484 (ReqParam tree)
+- name: ezr_5012
+  interface: "5012"
+  description: "5012-微信储值礼品卡流水"
+  domain: "礼品卡"
+  route: "api/wxgiftcard/GetGiftCardUseLogData"
+  input_schema_source: https://open.ezrpro.com/api/Doc/453 (ReqParam tree)
+- name: ezr_110700
+  interface: "110700"
+  description: "110700-微信交易账单下载"
+  domain: "第三方平台"
+  route: "api/TradeBill/GetTradeBill"
+  input_schema_source: https://open.ezrpro.com/api/Doc/50537 (ReqParam tree)
+- name: ezr_118901
+  interface: "118901"
+  description: "118901-根据手机号查询第三方平台绑定状态"
+  domain: "第三方平台"
+  route: "api/ThirdParty/GetVipBindStatusByMobileNo"
+  input_schema_source: https://open.ezrpro.com/api/Doc/50486 (ReqParam tree)
+- name: ezr_118902
+  interface: "118902"
+  description: "118902-第三方平台解绑"
+  domain: "第三方平台"
+  route: "api/ThirdParty/ThirdPartyUnBind"
+  input_schema_source: https://open.ezrpro.com/api/Doc/50487 (ReqParam tree)
+- name: ezr_118904
+  interface: "118904"
+  description: "118904-根据手机号码查询绑定平台状态"
+  domain: "第三方平台"
+  route: "api/ThirdParty/GetThirdPartyBindByMobileNo"
+  input_schema_source: https://open.ezrpro.com/api/Doc/50528 (ReqParam tree)
+- name: ezr_119001
+  interface: "119001"
+  description: "119001-第三方平台会员注册/绑定"
+  domain: "第三方平台"
+  route: "api/ThirdParty/ThirdPartyRegBind"
+  input_schema_source: https://open.ezrpro.com/api/Doc/50488 (ReqParam tree)
+- name: ezr_1509
+  interface: "1509"
+  description: "1509-根据群发Id列表查询统计信息"
+  domain: "第三方平台"
+  route: "api/Customer/GetWxWorkGroupTaskStatList"
+  input_schema_source: https://open.ezrpro.com/api/Doc/480 (ReqParam tree)
+- name: ezr_1900
+  interface: "1900"
+  description: "1900-请求微信通用接口"
+  domain: "第三方平台"
+  route: "api/weixinutil/connectwx"
+  input_schema_source: https://open.ezrpro.com/api/Doc/467 (ReqParam tree)
+- name: ezr_2070
+  interface: "2070"
+  description: "2070-第三方追加外呼任务会员"
+  domain: "第三方平台"
+  route: "api/AICallout/AddCustomer"
+  input_schema_source: https://open.ezrpro.com/api/Doc/50521 (ReqParam tree)
+- name: ezr_50002
+  interface: "50002"
+  description: "50002-添加外部联系人与导购关系"
+  domain: "第三方平台"
+  route: "api/Wxwork/AddExternalCdp"
+  input_schema_source: https://open.ezrpro.com/api/Doc/473 (ReqParam tree)
+- name: ezr_50003
+  interface: "50003"
+  description: "50003-获取企业微信ping"
+  domain: "第三方平台"
+  route: "api/Wxwork/GetWxworkPing"
+  input_schema_source: https://open.ezrpro.com/api/Doc/483 (ReqParam tree)
+- name: ezr_6001
+  interface: "6001"
+  description: "6001-聚合支付API-支付"
+  domain: "第三方平台"
+  route: "/upay/pay"
+  input_schema_source: https://open.ezrpro.com/api/Doc/600540 (ReqParam tree)
+- name: ezr_6002
+  interface: "6002"
+  description: "6002-聚合支付API-查询"
+  domain: "第三方平台"
+  route: "/upay/query"
+  input_schema_source: https://open.ezrpro.com/api/Doc/600541 (ReqParam tree)
+- name: ezr_6003
+  interface: "6003"
+  description: "6003-聚合支付API-撤销"
+  domain: "第三方平台"
+  route: "/upay/cancel"
+  input_schema_source: https://open.ezrpro.com/api/Doc/600542 (ReqParam tree)
+- name: ezr_6004
+  interface: "6004"
+  description: "6004-聚合支付API-申请退款"
+  domain: "第三方平台"
+  route: "/upay/refund/apply"
+  input_schema_source: https://open.ezrpro.com/api/Doc/600543 (ReqParam tree)
+- name: ezr_6005
+  interface: "6005"
+  description: "6005-聚合支付API-退款"
+  domain: "第三方平台"
+  route: "/upay/refund"
+  input_schema_source: https://open.ezrpro.com/api/Doc/600544 (ReqParam tree)
+- name: ezr_1100
+  interface: "1100"
+  description: "1100-上传门店日结"
+  domain: "销售数据"
+  route: "api/csale/shopsaleupload"
+  input_schema_source: https://open.ezrpro.com/api/Doc/100 (ReqParam tree)
+- name: ezr_1220
+  interface: "1220"
+  description: "1220-上传会员小票"
+  domain: "销售数据"
+  route: "api/csale/vipsaleupload"
+  input_schema_source: https://open.ezrpro.com/api/Doc/101 (ReqParam tree)
+- name: ezr_1222
+  interface: "1222"
+  description: "1222-会员交易数据获取"
+  domain: "销售数据"
+  route: "api/csale/vipsaleget"
+  input_schema_source: https://open.ezrpro.com/api/Doc/99 (ReqParam tree)
+- name: ezr_1240
+  interface: "1240"
+  description: "1240-电子质保单"
+  domain: "销售数据"
+  route: "/api/CSale/SaveWarrantyInfo"
+  input_schema_source: https://open.ezrpro.com/api/Doc/430 (ReqParam tree)
+- name: ezr_1247
+  interface: "1247"
+  description: "1247-会员交易数据获取"
+  domain: "销售数据"
+  route: "api/csale/vipsalepageget"
+  input_schema_source: https://open.ezrpro.com/api/Doc/445 (ReqParam tree)
+- name: ezr_1906
+  interface: "1906"
+  description: "1906-会员补单接口"
+  domain: "销售数据"
+  route: "api/csale/vipBackfillOrder"
+  input_schema_source: https://open.ezrpro.com/api/Doc/50513 (ReqParam tree)

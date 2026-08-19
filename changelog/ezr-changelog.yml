@@ -1,0 +1,179 @@
+generated: '2026-08-13'
+method: probed
+source: https://open.ezrpro.com/api/Book
+docs: https://open.ezrpro.com/#/apiFile
+note: >-
+  EZR publishes no prose changelog, release notes or "what's new" page. It does publish a
+  per-interface LastModifiedOn timestamp on every one of the 236 interfaces in its
+  documentation API (https://open.ezrpro.com/api/Book), which is a real, provider-published,
+  dated change signal. The entries below are that field, read directly — each is "this
+  interface reference was last revised on this date", NOT a described release. No release
+  descriptions, breaking-change flags or version numbers exist to capture, and none have
+  been invented.
+scheme: none
+current_version: null
+version_note: >-
+  No API version appears in the route, a header, or the envelope. Contract changes ship as a
+  NEW interface number rather than a new version of an existing one.
+entry_kind: interface-reference-revision
+interfaces_total: 236
+newest_revision: "2026-08-12 16:55:34"
+oldest_revision: "2021-08-30 10:54:45"
+revisions_by_year:
+  "2021": 6
+  "2022": 7
+  "2023": 115
+  "2024": 55
+  "2025": 32
+  "2026": 21
+entries:
+- date: "2026-08-12"
+  interface: "2024"
+  name: "2024-查询商城订单(批量)"
+  domain: "微商城"
+  kind: rest-interface
+  docs: https://open.ezrpro.com/#/apiFile/api/148
+- date: "2026-08-05"
+  interface: "1217"
+  name: "1217-券核销信息推送"
+  domain: "会员券"
+  kind: push-callback
+  docs: https://open.ezrpro.com/#/apiFile/api/75
+- date: "2026-08-03"
+  interface: "2030"
+  name: "2030-上传平台订单"
+  domain: "微商城(外部商城分销)"
+  kind: rest-interface
+  docs: https://open.ezrpro.com/#/apiFile/api/37
+- date: "2026-07-13"
+  interface: "1203"
+  name: "1203-查询会员信息"
+  domain: "会员主数据"
+  kind: rest-interface
+  docs: https://open.ezrpro.com/#/apiFile/api/42
+- date: "2026-07-10"
+  interface: "1247"
+  name: "1247-会员交易数据获取"
+  domain: "销售数据"
+  kind: rest-interface
+  docs: https://open.ezrpro.com/#/apiFile/api/445
+- date: "2026-07-09"
+  interface: "1300"
+  name: "1300-上传券核销信息"
+  domain: "会员券"
+  kind: rest-interface
+  docs: https://open.ezrpro.com/#/apiFile/api/71
+- date: "2026-07-01"
+  interface: "99999"
+  name: "99999-营销助手App接口格式"
+  domain: "接口拓展信息"
+  kind: rest-interface
+  docs: https://open.ezrpro.com/#/apiFile/api/50510
+- date: "2026-06-18"
+  interface: "110510"
+  name: "110510-退款（禁用）付费会员卡"
+  domain: "会员主数据"
+  kind: rest-interface
+  docs: https://open.ezrpro.com/#/apiFile/api/600549
+- date: "2026-06-18"
+  interface: "110508"
+  name: "110508-查询付费卡列表"
+  domain: "会员主数据"
+  kind: rest-interface
+  docs: https://open.ezrpro.com/#/apiFile/api/600547
+- date: "2026-06-18"
+  interface: "110509"
+  name: "110509 -购买付费卡"
+  domain: "会员主数据"
+  kind: rest-interface
+  docs: https://open.ezrpro.com/#/apiFile/api/600548
+- date: "2026-06-12"
+  interface: "2017"
+  name: "2017-退款查询"
+  domain: "微商城"
+  kind: rest-interface
+  docs: https://open.ezrpro.com/#/apiFile/api/454
+- date: "2026-06-10"
+  interface: "2022"
+  name: "2022-查询退货订单(批量)"
+  domain: "微商城"
+  kind: rest-interface
+  docs: https://open.ezrpro.com/#/apiFile/api/146
+- date: "2026-06-10"
+  interface: "2016"
+  name: "2016-查询退款订单"
+  domain: "微商城"
+  kind: rest-interface
+  docs: https://open.ezrpro.com/#/apiFile/api/152
+- date: "2026-05-29"
+  interface: "1104"
+  name: "1104-上传基础商品"
+  domain: "基础数据"
+  kind: rest-interface
+  docs: https://open.ezrpro.com/#/apiFile/api/11
+- date: "2026-05-22"
+  interface: "2018"
+  name: "2018-上传发货信息"
+  domain: "微商城"
+  kind: rest-interface
+  docs: https://open.ezrpro.com/#/apiFile/api/150
+- date: "2026-05-14"
+  interface: "1210"
+  name: "1210-会员信息推送"
+  domain: "会员主数据"
+  kind: push-callback
+  docs: https://open.ezrpro.com/#/apiFile/api/41
+- date: "2026-05-09"
+  interface: "20051"
+  name: "20051-商品查询"
+  domain: "微商城(外部商城分销)"
+  kind: rest-interface
+  docs: https://open.ezrpro.com/#/apiFile/api/429
+- date: "2026-04-30"
+  interface: "2051"
+  name: "2051-退款管理"
+  domain: "微商城"
+  kind: rest-interface
+  docs: https://open.ezrpro.com/#/apiFile/api/451
+- date: "2026-04-30"
+  interface: "1204"
+  name: "1204-查询会员积分"
+  domain: "会员积分"
+  kind: rest-interface
+  docs: https://open.ezrpro.com/#/apiFile/api/16
+- date: "2026-03-25"
+  interface: "2031"
+  name: "2031-商品分组列表"
+  domain: "微商城"
+  kind: rest-interface
+  docs: https://open.ezrpro.com/#/apiFile/api/476
+- date: "2026-01-29"
+  interface: "1008"
+  name: "1008-视频上传"
+  domain: "微商城"
+  kind: rest-interface
+  docs: https://open.ezrpro.com/#/apiFile/api/50517
+- date: "2025-11-28"
+  interface: "1905"
+  name: "1905-根据换货单Ids获取换货单列表"
+  domain: "微商城"
+  kind: rest-interface
+  docs: https://open.ezrpro.com/#/apiFile/api/600546
+- date: "2025-11-03"
+  interface: "1220"
+  name: "1220-上传会员小票"
+  domain: "销售数据"
+  kind: rest-interface
+  docs: https://open.ezrpro.com/#/apiFile/api/101
+- date: "2025-10-22"
+  interface: "1310"
+  name: "1310-券库信息推送"
+  domain: "会员券"
+  kind: push-callback
+  docs: https://open.ezrpro.com/#/apiFile/api/84
+- date: "2025-10-15"
+  interface: "12131"
+  name: "12131-券批量发放推送"
+  domain: "会员券"
+  kind: push-callback
+  docs: https://open.ezrpro.com/#/apiFile/api/87

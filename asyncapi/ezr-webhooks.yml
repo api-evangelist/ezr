@@ -1,0 +1,219 @@
+generated: '2026-08-13'
+method: searched
+source: https://open.ezrpro.com/api/Book
+docs: https://open.ezrpro.com/#/apiFile
+spec_type: none
+note: >-
+  EZR publishes no AsyncAPI document. It does publish a real, documented push/callback
+  (webhook) surface: 31 of the 236 interfaces in the EZR Open Platform reference are
+  EZR-to-third-party pushes rather than third-party-to-EZR calls. The consumer supplies the
+  receiving URL ("callback（调用方提供支持POST方式的接口地址）"); EZR POSTs the same signed
+  form-encoded envelope it accepts on inbound calls. Captured as a Webhooks catalog, not an
+  AsyncAPI spec — nothing was fabricated.
+transport:
+  protocol: HTTPS
+  method: POST
+  content_type: application/x-www-form-urlencoded
+  encoding: UTF-8
+  envelope: AppId + Sign + Timestamp + AppSystem + Args (identical to the inbound request envelope)
+  subscriber_url: supplied by the integrator to EZR; there is no self-service subscription API
+delivery:
+  timeout_seconds: 3
+  retries: 6
+  retry_schedule: 3 retries at 30s intervals, then 3 retries at 20-minute intervals
+  consumer_requirement: >-
+    EZR requires the receiving system to handle concurrency idempotently
+    ("第三方系统需做并发幂等处理") — the retry policy can redeliver the same event.
+  source: https://open.ezrpro.com/#/apiFile/guide/00001
+signature_verification:
+  algorithm: SHA1 (default) or MD5-32, uppercase hex
+  input: AppId={AppId}&Timestamp={Timestamp}&Token={Token} (params sorted alphabetically)
+  note: EZR signs its pushes with the same algorithm; receivers should verify before processing.
+event_count: 31
+events:
+- code: "1006"
+  name: "1006-用户推送"
+  domain: "Base data (stores, staff, districts)"
+  direction: EZR->third-party
+  last_modified: "2023-03-03 17:41:16"
+  docs: https://open.ezrpro.com/#/apiFile/api/12
+- code: "101201"
+  name: "101201-门店信息变更推送"
+  domain: "Base data (stores, staff, districts)"
+  direction: EZR->third-party
+  last_modified: "2024-05-14 16:14:14"
+  docs: https://open.ezrpro.com/#/apiFile/api/50512
+- code: "118905"
+  name: "118905-第三方平台会员解绑推送"
+  domain: "Third-party platform member binding"
+  direction: EZR->third-party
+  last_modified: "2025-02-26 18:32:27"
+  docs: https://open.ezrpro.com/#/apiFile/api/50530
+- code: "1210"
+  name: "1210-会员信息推送"
+  domain: "Member master data"
+  direction: EZR->third-party
+  last_modified: "2026-05-14 11:32:52"
+  docs: https://open.ezrpro.com/#/apiFile/api/41
+- code: "12105"
+  name: "12105-会员注销推送"
+  domain: "Member master data"
+  direction: EZR->third-party
+  last_modified: "2023-03-06 16:20:22"
+  docs: https://open.ezrpro.com/#/apiFile/api/431
+- code: "1211"
+  name: "1211-EZR积分流水下发"
+  domain: "Loyalty points"
+  direction: EZR->third-party
+  last_modified: "2025-07-07 11:44:50"
+  docs: https://open.ezrpro.com/#/apiFile/api/13
+- code: "1211-1"
+  name: "1211-1-积分变更来源字段枚举"
+  domain: "Interface extension / enum references"
+  direction: EZR->third-party
+  last_modified: "2025-07-14 19:52:42"
+  docs: https://open.ezrpro.com/#/apiFile/api/50539
+- code: "1212"
+  name: "1212-促销规则查询"
+  domain: "Coupons"
+  direction: EZR->third-party
+  last_modified: "2023-03-06 17:54:50"
+  docs: https://open.ezrpro.com/#/apiFile/api/69
+- code: "1213"
+  name: "1213-优惠券发放推送"
+  domain: "Coupons"
+  direction: EZR->third-party
+  last_modified: "2024-12-25 19:40:35"
+  docs: https://open.ezrpro.com/#/apiFile/api/70
+- code: "12131"
+  name: "12131-券批量发放推送"
+  domain: "Coupons"
+  direction: EZR->third-party
+  last_modified: "2025-10-15 16:36:25"
+  docs: https://open.ezrpro.com/#/apiFile/api/87
+- code: "1214"
+  name: "1214-等级变动推送"
+  domain: "Member master data"
+  direction: EZR->third-party
+  last_modified: "2023-08-31 14:27:40"
+  docs: https://open.ezrpro.com/#/apiFile/api/43
+- code: "1215"
+  name: "1215-合并卡号推送"
+  domain: "Member master data"
+  direction: EZR->third-party
+  last_modified: "2025-07-02 14:44:09"
+  docs: https://open.ezrpro.com/#/apiFile/api/39
+- code: "1217"
+  name: "1217-券核销信息推送"
+  domain: "Coupons"
+  direction: EZR->third-party
+  last_modified: "2026-08-05 17:33:39"
+  docs: https://open.ezrpro.com/#/apiFile/api/75
+- code: "1218"
+  name: "1218-微信解绑推送"
+  domain: "Member master data"
+  direction: EZR->third-party
+  last_modified: "2023-03-06 15:30:58"
+  docs: https://open.ezrpro.com/#/apiFile/api/55
+- code: "1219"
+  name: "1219-优惠券转赠推送"
+  domain: "Coupons"
+  direction: EZR->third-party
+  last_modified: "2025-02-05 14:03:13"
+  docs: https://open.ezrpro.com/#/apiFile/api/77
+- code: "1231"
+  name: "1231-会员服务关系变更推送"
+  domain: "Member master data"
+  direction: EZR->third-party
+  last_modified: "2023-08-25 16:08:08"
+  docs: https://open.ezrpro.com/#/apiFile/api/64
+- code: "12311"
+  name: "12311-会员服务关系变更单条推送"
+  domain: "Member master data"
+  direction: EZR->third-party
+  last_modified: "2023-07-18 10:58:34"
+  docs: https://open.ezrpro.com/#/apiFile/api/459
+- code: "12313"
+  name: "12313-粉丝服务关系变更推送"
+  domain: "Member master data"
+  direction: EZR->third-party
+  last_modified: "2023-07-18 11:14:21"
+  docs: https://open.ezrpro.com/#/apiFile/api/50500
+- code: "1241"
+  name: "1241-会员品牌标签推送"
+  domain: "Member master data"
+  direction: EZR->third-party
+  last_modified: "2025-03-26 11:49:40"
+  docs: https://open.ezrpro.com/#/apiFile/api/422
+- code: "1310"
+  name: "1310-券库信息推送"
+  domain: "Coupons"
+  direction: EZR->third-party
+  last_modified: "2025-10-22 16:48:12"
+  docs: https://open.ezrpro.com/#/apiFile/api/84
+- code: "1312"
+  name: "1312-券库禁用推送"
+  domain: "Coupons"
+  direction: EZR->third-party
+  last_modified: "2023-07-28 14:24:05"
+  docs: https://open.ezrpro.com/#/apiFile/api/174
+- code: "18001"
+  name: "18001-短信消息推送"
+  domain: "Messaging (SMS / WeChat template)"
+  direction: EZR->third-party
+  last_modified: "2023-03-07 15:17:51"
+  docs: https://open.ezrpro.com/#/apiFile/api/105
+- code: "2001"
+  name: "2001-商城订单推送"
+  domain: "WeChat mall (commerce)"
+  direction: EZR->third-party
+  last_modified: "2024-09-11 15:49:27"
+  docs: https://open.ezrpro.com/#/apiFile/api/165
+- code: "20011"
+  name: "20011-订单收货人变更推送"
+  domain: "WeChat mall (commerce)"
+  direction: EZR->third-party
+  last_modified: "2023-03-07 16:44:18"
+  docs: https://open.ezrpro.com/#/apiFile/api/402
+- code: "20012"
+  name: "20012-订单备注推送"
+  domain: "WeChat mall (commerce)"
+  direction: EZR->third-party
+  last_modified: "2024-07-30 15:38:44"
+  docs: https://open.ezrpro.com/#/apiFile/api/432
+- code: "20013"
+  name: "20013-会员补单推送"
+  domain: "Sales / POS transactions"
+  direction: EZR->third-party
+  last_modified: "2023-12-13 11:05:30"
+  docs: https://open.ezrpro.com/#/apiFile/api/50505
+- code: "2002"
+  name: "2002-退货单推送"
+  domain: "WeChat mall (commerce)"
+  direction: EZR->third-party
+  last_modified: "2024-04-28 17:01:55"
+  docs: https://open.ezrpro.com/#/apiFile/api/168
+- code: "20021"
+  name: "20021-退货物流变更推送"
+  domain: "WeChat mall (commerce)"
+  direction: EZR->third-party
+  last_modified: "2021-08-30 15:43:52"
+  docs: https://open.ezrpro.com/#/apiFile/api/403
+- code: "2113"
+  name: "2113-退款单推送"
+  domain: "WeChat mall (commerce)"
+  direction: EZR->third-party
+  last_modified: "2025-04-08 15:57:23"
+  docs: https://open.ezrpro.com/#/apiFile/api/167
+- code: "2500"
+  name: "2500-成长值推送"
+  domain: "Member master data"
+  direction: EZR->third-party
+  last_modified: "2023-03-06 16:12:55"
+  docs: https://open.ezrpro.com/#/apiFile/api/464
+- code: "2800"
+  name: "2800-EZR商品信息变更推送"
+  domain: "WeChat mall (commerce)"
+  direction: EZR->third-party
+  last_modified: "2022-10-18 17:36:18"
+  docs: https://open.ezrpro.com/#/apiFile/api/478
