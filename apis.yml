@@ -25,6 +25,17 @@ x-tier-reason: >-
   complete, anonymously readable reference for 236 interfaces, plus a provider-published Agent
   Skill. The prior profile's claim that EZR "publishes no public developer portal or API
   reference" was wrong and has been corrected.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: contact-sales
   onboarding: sales
