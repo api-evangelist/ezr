@@ -2,17 +2,20 @@
   "repo": "ezr",
   "feeds": [
     {
-      "source": "https://www.ezrpro.com/ecology/link",
-      "feed_url": "https://www.ezrpro.com/ecology/link",
+      "source": "https://open.ezrpro.com/#/apiFile/guide/00001",
+      "feed_url": "https://open.ezrpro.com/#/apiFile/guide/00001",
       "title": "",
       "saved": 0,
       "method": "none"
     },
     {
-      "source": "https://open.ezrpro.com/#/apiFile/guide/00001",
-      "error": "URLError"
+      "source": "https://www.ezrpro.com/ecology/link",
+      "feed_url": "https://www.ezrpro.com/ecology/link",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-08-30T22:33:40Z"
+  "fetched": "2026-09-06T19:17:18Z"
 }
