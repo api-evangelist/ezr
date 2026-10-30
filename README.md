@@ -64,6 +64,117 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-EZR is a company surfaced as a portfolio company of dcm-ventures and added to the API Evangelist network as a stub for enrichment. Sector: enterprise. This profile is a lead awaiting the enrichment pipeline.
+EZR (上海驿氪 / Shanghai EasyRetailPro) is a Shanghai-based retail marketing technology company founded in 2015 that builds SCRM and new-retail CRM software for multi-store and chain brands. Its platform combines a Marketing Cloud and in-store CRM to deliver omnichannel member management, WeChat mini-program malls, guide (导购) distribution and full-staff sales tools, live-streaming commerce, points malls, and campaign automation. EZR serves 800+ brands across fashion, beauty, home goods, food, and pharmacy, and is backed by Tencent, JD.com, DCM, and Lenovo Star. The EZR Open Platform (开放平台) at open.ezrpro.com publishes a reference for 236 interfaces across 11 business domains — stores and staff, member master data, loyalty points, coupons, sales receipts, WeChat mall, gift cards, messaging and third-party platform binding — of which 31 are EZR-to-integrator push callbacks. Every interface is an HTTP POST with a form-encoded, SHA1/MD5-signed envelope carrying the business payload as a JSON string; there is no OpenAPI, no OAuth, no versioning scheme and no self-service onboarding. EZR does publish a packaged Agent Skill for generating integration code.
 
-Backed by: dcm-ventures — https://www.ezrpro.com/
+**Areas:** Company · Enterprise · SCRM · CRM · Retail · Marketing · WeChat · E-Commerce · Loyalty · Membership · Coupons · Point-of-Sale
+
+## EZR on APIs.io
+
+Everything profiled for EZR is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/ezr/](https://apis.io/providers/ezr/)** — or go straight to one of the APIs or properties below.
+
+### APIs (2)
+
+- [EZR Open Platform](https://apis.io/apis/ezr/ezr-open-platform/) — The EZR 开放平台 integration surface — 236 documented interfaces across 11 business domains (base data, member master data, loyalty points, coupons, sales data,…
+- [EZR KOS Open Platform](https://apis.io/apis/ezr/ezr-kos-open-platform/) — The KOS (Key Opinion Sales) open platform — EZR's separate integration surface for guide/associate-led social selling, documented in its own developer guide…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Ezr Webhooks](https://apis.io/asyncapis/ezr/ezr-webhooks/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [ezr-mcp.yml](https://apis.io/servers/ezr/ezr-mcp-yml/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Ezr Authentication](https://apis.io/security/ezr/ezr-authentication/)
+- [Ezr Domain Security](https://apis.io/security/ezr/ezr-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Ezr Plans Pricing](https://apis.io/plans/ezr/ezr-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Ezr Rate Limits](https://apis.io/rate-limits/ezr/ezr-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.ezrpro.com/)
+- [Documentation](https://open.ezrpro.com/#/apiFile)
+- [Getting started](https://open.ezrpro.com/#/apiFile/guide/00001)
+- [API reference](https://open.ezrpro.com/#/apiFile)
+- [Support](https://www.ezrpro.com/contact)
+- [Blog](https://www.ezrpro.com/about/news)
+- [Privacy policy](http://www.ezrpro.com/privacy.html)
+
+## API Evangelist rating
+
+**Kin Score 39.9** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 39.0 |
+| Contract governance | 4.5 |
+| Operational transparency | 44.7 |
+| Developer ergonomics | 71.4 |
+| Access clarity | 10.5 |
+
+**Agent readiness 31.7** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | yes |
+| Well Known Catalog | yes |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 20.6** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/ezr/](https://apis.io/providers/ezr/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for EZR: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/ezr/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
